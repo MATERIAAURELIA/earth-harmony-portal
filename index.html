@@ -2166,7 +2166,10 @@ function showPostCheckin() {
   showScreen('s-postcheckin');
 }
 
+let instrumentsInited = false;
 function initInstruments() {
+  if (instrumentsInited) return;
+  instrumentsInited = true;
   const grid = document.getElementById('instrumentGrid');
   grid.innerHTML = '';
   state.instruments = [];
@@ -2208,7 +2211,10 @@ const PHENOMENA = [
   'I lost track of time',
 ];
 
+let phenomenaInited = false;
 function initPhenomena() {
+  if (phenomenaInited) return;
+  phenomenaInited = true;
   const grid = document.getElementById('phenomenaGrid');
   grid.innerHTML = '';
   state.phenomena = [];
@@ -2388,7 +2394,10 @@ const SHIFT_WORDS = [
   'Joy', 'Awe', 'Grounded', 'Renewed',
 ];
 
+let shiftWordsInited = false;
 function initShiftWords() {
+  if (shiftWordsInited) return;
+  shiftWordsInited = true;
   const grid = document.getElementById('shiftWordGrid');
   grid.innerHTML = '';
   state.shiftWords = [];
