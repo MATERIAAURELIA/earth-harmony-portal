@@ -1251,7 +1251,7 @@
     <div>See what shifts</div>
   </div>
   <div class="spacer"></div>
-  <input type="text" class="text-input" id="nameInput" placeholder="what should we call you?" maxlength="20" autocomplete="off">
+  <input type="text" class="text-input" id="nameInput" placeholder="what should we call you?" maxlength="20" autocomplete="off" oninput="document.getElementById('enterBtn').disabled = this.value.trim().length === 0" onkeydown="if(event.key==='Enter' && this.value.trim()){playPortalChime();enterPortal();}">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; opacity: 0.4; font-style: italic;">eg. GoldenWeaver · RebelHugz7 · WildBear</div>
   <div class="spacer"></div>
   <button class="btn btn-solid" id="enterBtn" onclick="playPortalChime(); enterPortal()" disabled>Begin</button>
