@@ -1272,8 +1272,8 @@
   <input type="text" class="text-input" id="intentionInput" placeholder="My intention is..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; font-style: italic;">(or let it find you)</div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="submitIntention(true)">Continue</button>
-  <button class="btn-skip" onclick="submitIntention(false)">Keep private</button>
+  <button class="btn btn-solid" onclick="submitIntention(true)">Share with the Room</button>
+  <button class="btn btn-solid" onclick="submitIntention(false)" style="background:transparent; border:1.5px solid var(--gold); color:var(--gold);">Keep Private 🔒</button>
   <button class="btn-skip" onclick="skipIntention()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-journey')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1349,7 +1349,7 @@
 <div id="s-communityintentions" class="screen">
   <div class="spacer"></div>
   <div class="title" style="font-family: 'Cinzel', serif; font-size: 20px;">Our Collective Intention</div>
-  <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; margin-top: 8px; line-height: 1.5; max-width: 300px;">This is what we're all holding tonight.</div>
+  <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; margin-top: 8px; line-height: 1.5; max-width: 300px;">We each carry a thread.<br>Together, we weave the container.</div>
   <div class="spacer"></div>
   <div id="intentionBoard" style="width:100%; max-width:340px; text-align:center;"></div>
   <div class="spacer"></div>
