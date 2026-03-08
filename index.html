@@ -75,7 +75,7 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 500px; height: 500px;
-    opacity: 0.04;
+    opacity: 0.08;
     pointer-events: none;
     z-index: 0;
     animation: slowRotate 120s linear infinite;
@@ -1108,16 +1108,37 @@
 
 <!-- Sacred geometry background -->
 <svg class="sacred-bg" viewBox="0 0 500 500">
-  <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(212,162,78,0.3)" stroke-width="0.5"/>
-  <circle cx="250" cy="250" r="150" fill="none" stroke="rgba(212,162,78,0.2)" stroke-width="0.5"/>
-  <circle cx="250" cy="250" r="100" fill="none" stroke="rgba(212,162,78,0.15)" stroke-width="0.5"/>
-  <!-- Flower of life hint -->
-  <circle cx="250" cy="150" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
-  <circle cx="336" cy="200" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
-  <circle cx="336" cy="300" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
-  <circle cx="250" cy="350" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
-  <circle cx="164" cy="300" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
-  <circle cx="164" cy="200" r="100" fill="none" stroke="rgba(212,162,78,0.1)" stroke-width="0.3"/>
+  <!-- Metatron's Cube -->
+  <!-- Outer boundary -->
+  <circle cx="250" cy="250" r="220" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.6"/>
+  <!-- Seed of Life: 7 circles -->
+  <circle cx="250" cy="250" r="100" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="0.5"/>
+  <circle cx="250" cy="150" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <circle cx="336" cy="200" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <circle cx="336" cy="300" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <circle cx="250" cy="350" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <circle cx="164" cy="300" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <circle cx="164" cy="200" r="100" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+  <!-- Metatron lines: connecting all 13 centers -->
+  <!-- Inner hexagon -->
+  <line x1="250" y1="150" x2="336" y2="200" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <line x1="336" y1="200" x2="336" y2="300" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <line x1="336" y1="300" x2="250" y2="350" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <line x1="250" y1="350" x2="164" y2="300" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <line x1="164" y1="300" x2="164" y2="200" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <line x1="164" y1="200" x2="250" y2="150" stroke="rgba(212,175,55,0.12)" stroke-width="0.4"/>
+  <!-- Cross connections -->
+  <line x1="250" y1="150" x2="250" y2="350" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="250" y1="150" x2="336" y2="300" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="250" y1="150" x2="164" y2="300" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="336" y1="200" x2="164" y2="300" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="336" y1="200" x2="250" y2="350" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="336" y1="300" x2="164" y2="200" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="336" y1="300" x2="250" y2="150" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="164" y1="200" x2="336" y2="300" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <line x1="164" y1="200" x2="250" y2="350" stroke="rgba(212,175,55,0.1)" stroke-width="0.3"/>
+  <!-- Center point -->
+  <circle cx="250" cy="250" r="2" fill="rgba(212,175,55,0.2)"/>
 </svg>
 
 <div class="fac-toggle" onclick="toggleFacilitator()">⚙️</div>
