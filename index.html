@@ -1576,11 +1576,10 @@ const FEELINGS = [
 ];
 
 const CATEGORIES = [
-  { id: 'mental',     name: 'Mental',           low: 'Foggy',      high: 'Clear' },
-  { id: 'physical',   name: 'Physical',         low: 'Tense',      high: 'Released' },
-  { id: 'emotional',  name: 'Emotional',        low: 'Heavy',      high: 'Light' },
-  { id: 'spiritual',  name: 'Spiritual',        low: 'Disconnected', high: 'Connected' },
   { id: 'alignment',  name: 'Alignment',        low: 'Off Course', high: 'On Purpose' },
+  { id: 'mind',       name: 'Mind',             low: 'Foggy',      high: 'Clear' },
+  { id: 'body',       name: 'Body',             low: 'Tense',      high: 'Released' },
+  { id: 'spirit',     name: 'Spirit',           low: 'Heavy',      high: 'Light' },
 ];
 
 const INSTRUMENTS = [
@@ -1852,18 +1851,16 @@ function buildSliders(containerId, prefix) {
     const div = document.createElement('div');
     div.className = 'slider-item';
     div.innerHTML = `
-      <div class="slider-header">
-        <span class="slider-name">${cat.name}</span>
-        <span class="slider-val" id="${prefix}_val_${cat.id}">5</span>
+      <div class="slider-labels">
+        <span>${cat.low}</span>
+        <span class="slider-name" style="font-weight:600; color:var(--gold); letter-spacing:1px; text-transform:uppercase; font-size:13px;">${cat.name}</span>
+        <span>${cat.high}</span>
       </div>
-      <div class="slider-track">
+      <div class="slider-track" style="position:relative;">
         <input type="range" min="1" max="10" value="5" step="1"
           id="${prefix}_${cat.id}"
           oninput="onSlide('${prefix}', '${cat.id}', this.value)">
-      </div>
-      <div class="slider-labels">
-        <span>${cat.low}</span>
-        <span>${cat.high}</span>
+        <div class="slider-bubble" id="${prefix}_val_${cat.id}" style="position:absolute; top:-28px; background:var(--gold); color:var(--bg); font-size:13px; font-weight:700; padding:2px 8px; border-radius:8px; pointer-events:none; transition:left 0.1s;">5</div>
       </div>
     `;
     container.appendChild(div);
@@ -1873,7 +1870,15 @@ function buildSliders(containerId, prefix) {
 let lastSliderVals = {};
 function onSlide(prefix, catId, val) {
   const key = prefix + '_' + catId;
-  document.getElementById(`${prefix}_val_${catId}`).textContent = val;
+  const bubble = document.getElementById(`${prefix}_val_${catId}`);
+  bubble.textContent = val;
+  // Position bubble above thumb
+  const slider = document.getElementById(`${prefix}_${catId}`);
+  const pct = (val - 1) / 9;
+  const sliderW = slider.offsetWidth;
+  const thumbOffset = 10; // half thumb width
+  const left = thumbOffset + pct * (sliderW - 2 * thumbOffset);
+  bubble.style.left = (left - 14) + 'px';
   if (lastSliderVals[key] !== val) {
     haptic('light');
     lastSliderVals[key] = val;
