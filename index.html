@@ -1424,11 +1424,30 @@
         <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">Which sounds touched you?</span>
       </div>
     </div>
+    <div class="avatar-option" onclick="showScreen('s-postfeedback')" style="cursor:pointer;">
+      <span class="avatar-emoji-circle">💬</span>
+      <div style="display:flex;flex-direction:column;">
+        <span class="avatar-label">Feedback</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">Anything you'd like us to know</span>
+      </div>
+    </div>
   </div>
   <div class="spacer-lg"></div>
   <button class="btn btn-solid" onclick="submitPostCheckin(); renderBeforeCloud(); showScreen('s-beforecloud')">I'm Complete</button>
   <button class="btn-skip" onclick="submitPostCheckin(); renderBeforeCloud(); showScreen('s-beforecloud')">Skip all</button>
   <button class="btn-skip" onclick="showScreen('s-postshift')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
+<!-- POST: Feedback -->
+<div id="s-postfeedback" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-size: 20px;">Feedback</div>
+  <div class="subtitle">Anything you'd like to share — requests, thoughts, what worked, what didn't</div>
+  <div class="spacer"></div>
+  <textarea class="insight-area" id="feedbackText" placeholder="Your voice matters here..." rows="4"></textarea>
+  <div class="spacer-lg"></div>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Insight retrieval -->
@@ -2470,6 +2489,8 @@ function submitPostCheckin() {
   });
 
   state.insight = document.getElementById('insightText').value.trim();
+  state.feedback = (document.getElementById('feedbackText') || {}).value || '';
+  state.feedback = state.feedback.trim();
 
   // Save completion locally + Firebase
   const completeData = {
@@ -2479,6 +2500,7 @@ function submitPostCheckin() {
     preScores: { ...state.preScores },
     postScores: { ...state.postScores },
     insight: state.insight,
+    feedback: state.feedback,
     instrument: state.instrument,
     instruments: [...state.instruments],
     phenomena: [...state.phenomena],
