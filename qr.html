@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth Harmony — Scan to Check In</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(160deg, #1a3322 0%, #143a25 20%, #0d1f12 45%, #0a1a0d 70%, #061008 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Georgia', serif;
+    color: #d4af37;
+    text-align: center;
+    padding: 40px;
+  }
+  .title {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+  }
+  .subtitle {
+    font-size: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 6px;
+  }
+  .qr-container {
+    margin: 40px 0;
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(212,175,55,0.15);
+  }
+  .qr-container img, .qr-container canvas {
+    display: block;
+    width: 280px;
+    height: 280px;
+  }
+  .scan-text {
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  @media (min-width: 768px) {
+    .title { font-size: 56px; }
+    .subtitle { font-size: 26px; }
+    .qr-container img, .qr-container canvas { width: 360px; height: 360px; }
+    .scan-text { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="title">Earth Harmony</div>
+<div class="subtitle">Sound Bath Portal</div>
+
+<div class="qr-container">
+  <canvas id="qr"></canvas>
+</div>
+
+<div class="scan-text">Scan to Check In</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+  const SESSION = 'EY0308';
+  const url = `https://materiaaurelia.github.io/earth-harmony-portal/?session=${SESSION}`;
+  QRCode.toCanvas(document.getElementById('qr'), url, {
+    width: 360,
+    margin: 2,
+    color: { dark: '#0a1a0d', light: '#ffffff' }
+  });
+</script>
+
+</body>
+</html>
