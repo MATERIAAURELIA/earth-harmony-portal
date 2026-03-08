@@ -1254,7 +1254,7 @@
   <input type="text" class="text-input" id="nameInput" placeholder="what should we call you?" maxlength="20" autocomplete="off" oninput="document.getElementById('enterBtn').disabled = this.value.trim().length === 0" onkeydown="if(event.key==='Enter' && this.value.trim()){playPortalChime();enterPortal();}">
   <div style="color: var(--text-dim); font-size: 15px; margin-top: 10px; opacity: 0.5; font-style: italic;">eg. GoldenWeaver · RebelHugz7 · WildBear</div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" id="enterBtn" onclick="enterPortal()" disabled>Begin</button>
+  <button class="btn btn-solid" id="enterBtn" onclick="alert('clicked');enterPortal()" disabled>Begin</button>
   <div class="nav-dots">
     <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
