@@ -1559,11 +1559,11 @@ const FEELINGS = [
 ];
 
 const CATEGORIES = [
-  { id: 'calm',       name: 'Inner Calm',      low: 'Restless',   high: 'Still' },
-  { id: 'body',       name: 'Body Ease',        low: 'Tense',      high: 'Released' },
-  { id: 'clarity',    name: 'Mental Clarity',   low: 'Foggy',      high: 'Crystal' },
-  { id: 'connection', name: 'Connection',       low: 'Isolated',   high: 'Unified' },
-  { id: 'spirit',     name: 'Spirit',           low: 'Heavy',      high: 'Light' },
+  { id: 'mental',     name: 'Mental',           low: 'Foggy',      high: 'Clear' },
+  { id: 'physical',   name: 'Physical',         low: 'Tense',      high: 'Released' },
+  { id: 'emotional',  name: 'Emotional',        low: 'Heavy',      high: 'Light' },
+  { id: 'spiritual',  name: 'Spiritual',        low: 'Disconnected', high: 'Connected' },
+  { id: 'alignment',  name: 'Alignment',        low: 'Off Course', high: 'On Purpose' },
 ];
 
 const INSTRUMENTS = [
@@ -1853,9 +1853,14 @@ function buildSliders(containerId, prefix) {
   });
 }
 
+let lastSliderVals = {};
 function onSlide(prefix, catId, val) {
+  const key = prefix + '_' + catId;
   document.getElementById(`${prefix}_val_${catId}`).textContent = val;
-  haptic('light');
+  if (lastSliderVals[key] !== val) {
+    haptic('light');
+    lastSliderVals[key] = val;
+  }
 }
 
 function skipPreCheckin() {
