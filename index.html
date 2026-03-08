@@ -1266,7 +1266,7 @@
   <div class="spacer"></div>
   <div class="title" style="font-family: 'Cinzel', serif; font-size: 20px;">Power of Your Intention</div>
   <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; margin-top: 12px; line-height: 1.6; max-width: 300px;">
-    Where attention goes, energy flows.<br>Name what you're calling in.
+    Intention is powerful alone.<br>Together, it's transformative.<br>Name what you're calling in.
   </div>
   <div class="spacer-lg"></div>
   <input type="text" class="text-input" id="intentionInput" placeholder="My intention is..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
@@ -1345,6 +1345,18 @@
 </div>
 
 <!-- ==================== 4b. JOURNEY COMPLETE ==================== -->
+<!-- COMMUNITY INTENTIONS -->
+<div id="s-communityintentions" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-family: 'Cinzel', serif; font-size: 20px;">Our Collective Intention</div>
+  <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; margin-top: 8px; line-height: 1.5; max-width: 300px;">We each carry a thread.<br>Together, we weave the container.</div>
+  <div class="spacer"></div>
+  <div id="intentionBoard" style="width:100%; max-width:340px; text-align:center;"></div>
+  <div class="spacer"></div>
+  <button class="btn btn-solid" onclick="showScreen('s-journeycomplete')">Continue</button>
+  <button class="btn-skip" onclick="showScreen('s-intention')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
 <div id="s-journeycomplete" class="screen">
   <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap: 32px;">
     <div class="title" style="font-family: 'Cinzel', serif; font-size: 20px;">You're Ready</div>
@@ -1364,10 +1376,9 @@
         <span style="font-size:13px; color:var(--text-dim);">✈️ Airplane Mode</span>
       </div>
     </div>
-    <div id="intentionBoard" style="display:none; width:100%; max-width:340px; margin-top:8px; text-align:center;"></div>
     <div class="subtitle" style="font-size: 15px; opacity: 0.5;">Come back here when the journey is complete.</div>
     <button class="btn btn-solid" onclick="showPostCheckin()">Journey Complete →</button>
-    <button class="btn-skip" onclick="showScreen('s-intention')" style="opacity:0.4; font-size: 12px;">← Back</button>
+    <button class="btn-skip" onclick="showScreen('s-communityintentions')" style="opacity:0.4; font-size: 12px;">← Back</button>
   </div>
 </div>
 
@@ -1963,14 +1974,14 @@ function submitIntention(share) {
   }
   haptic('medium');
   renderIntentionBoard();
-  showScreen('s-journeycomplete');
+  showScreen('s-communityintentions');
 }
 
 function skipIntention() {
   state.intention = '';
   haptic('light');
   renderIntentionBoard();
-  showScreen('s-journeycomplete');
+  showScreen('s-communityintentions');
 }
 
 // ==================== INTENTION BOARD ====================
