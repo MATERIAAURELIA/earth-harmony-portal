@@ -1387,8 +1387,52 @@
   <div class="spacer"></div>
   <div class="slider-group" id="postSliders"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="showScreen('s-postinsight')">Continue</button>
-  <button class="btn-skip" onclick="showScreen('s-postinsight')">Skip</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Continue</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')">Skip</button>
+</div>
+
+<!-- POST: Harvest menu -->
+<div id="s-postharvest" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-size: 22px;">Harvest Your Experience</div>
+  <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; margin-top: 8px; line-height: 1.6; max-width: 300px;">
+    Choose what feels right — use all, a few, or none.
+  </div>
+  <div class="spacer-lg"></div>
+  <div style="display:flex; flex-direction:column; gap:10px; width:100%; max-width:340px;">
+    <div class="avatar-option" onclick="showScreen('s-postinsight')" style="cursor:pointer;">
+      <span class="avatar-emoji-circle">🪶</span>
+      <div style="display:flex;flex-direction:column;">
+        <span class="avatar-label">Insight</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">Name what you're bringing back</span>
+      </div>
+    </div>
+    <div class="avatar-option" onclick="initPhenomena(); showScreen('s-postphenomena')" style="cursor:pointer;">
+      <span class="avatar-emoji-circle">✨</span>
+      <div style="display:flex;flex-direction:column;">
+        <span class="avatar-label">Phenomena</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">What happened in there?</span>
+      </div>
+    </div>
+    <div class="avatar-option" onclick="initShiftWords(); showScreen('s-postshift')" style="cursor:pointer;">
+      <span class="avatar-emoji-circle">🌀</span>
+      <div style="display:flex;flex-direction:column;">
+        <span class="avatar-label">The Shift</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">What are you leaving with?</span>
+      </div>
+    </div>
+    <div class="avatar-option" onclick="initInstruments(); showScreen('s-postsounds')" style="cursor:pointer;">
+      <span class="avatar-emoji-circle">🎵</span>
+      <div style="display:flex;flex-direction:column;">
+        <span class="avatar-label">Sounds</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">Which sounds touched you?</span>
+      </div>
+    </div>
+  </div>
+  <div class="spacer-lg"></div>
+  <button class="btn btn-solid" onclick="submitPostCheckin()">I'm Complete</button>
+  <button class="btn-skip" onclick="submitPostCheckin()">Skip all → Results</button>
+  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Insight retrieval -->
@@ -1401,9 +1445,8 @@
   <div class="spacer-lg"></div>
   <textarea class="insight-area" id="insightText" placeholder="What do you want to remember from this journey?" rows="3"></textarea>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="initPhenomena(); showScreen('s-postphenomena')">Continue</button>
-  <button class="btn-skip" onclick="initPhenomena(); showScreen('s-postphenomena')">Skip</button>
-  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: What happened in there? -->
@@ -1414,9 +1457,8 @@
   <div class="spacer"></div>
   <div class="word-grid" id="phenomenaGrid"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="initShiftWords(); showScreen('s-postshift')">Continue</button>
-  <button class="btn-skip" onclick="initShiftWords(); showScreen('s-postshift')">Skip</button>
-  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: The Shift — exit words -->
@@ -1431,9 +1473,8 @@
     <button class="btn" onclick="addCustomShift()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="showScreen('s-postsounds')">Continue</button>
-  <button class="btn-skip" onclick="showScreen('s-postsounds')">Skip</button>
-  <button class="btn-skip" onclick="showScreen('s-postphenomena')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Which sounds -->
@@ -1448,9 +1489,8 @@
     <button class="btn" onclick="addCustomInstrument()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="submitPostCheckin()">Complete</button>
-  <button class="btn-skip" onclick="submitPostCheckin()">Skip to results</button>
-  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- ==================== 6. RESULTS & PORTAL ==================== -->
