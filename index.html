@@ -1456,6 +1456,10 @@
   <div class="subtitle">Tap anything you experienced</div>
   <div class="spacer"></div>
   <div class="word-grid" id="phenomenaGrid"></div>
+  <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
+    <input type="text" class="custom-feeling" id="customPhenomenon" placeholder="+ add your own" maxlength="30" style="flex:1;">
+    <button class="btn" onclick="addCustomPhenomenon()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+  </div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
   <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
@@ -2202,6 +2206,32 @@ function initPhenomena() {
     };
     grid.appendChild(chip);
   });
+  document.getElementById('customPhenomenon').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addCustomPhenomenon();
+  });
+}
+
+function addCustomPhenomenon() {
+  const input = document.getElementById('customPhenomenon');
+  const text = input.value.trim();
+  if (!text) return;
+  state.phenomena.push(text);
+  const grid = document.getElementById('phenomenaGrid');
+  const chip = document.createElement('div');
+  chip.className = 'word-chip selected';
+  chip.textContent = text;
+  chip.onclick = () => {
+    chip.classList.toggle('selected');
+    haptic('light');
+    if (chip.classList.contains('selected')) {
+      state.phenomena.push(text);
+    } else {
+      state.phenomena = state.phenomena.filter(x => x !== text);
+    }
+  };
+  grid.appendChild(chip);
+  input.value = '';
+  haptic('medium');
 }
 
 // ==================== POST: SHIFT WORDS ====================
