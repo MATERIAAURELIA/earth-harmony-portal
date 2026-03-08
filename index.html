@@ -1145,33 +1145,14 @@
 <div class="materia-mark">✨ materia</div>
 
 <!-- ==================== 0. INTRO ==================== -->
-<div id="s-intro" class="screen active">
-  <div style="display:flex; gap:8px; justify-content:center; margin-top:16px;">
-    <button class="theme-btn active" onclick="setTheme('forest')" id="themeForest" style="padding:6px 16px; border-radius:20px; border:1.5px solid var(--gold); background:linear-gradient(135deg,#1a3322,#0d1f12); color:var(--gold); font-size:12px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Forest</button>
-    <button class="theme-btn" onclick="setTheme('midnight')" id="themeMidnight" style="padding:6px 16px; border-radius:20px; border:1.5px solid rgba(212,175,55,0.3); background:linear-gradient(135deg,#0a0a0f,#111118); color:var(--text-dim); font-size:12px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Midnight</button>
-  </div>
-  <div class="spacer-lg"></div>
-  <div class="intro-step" style="animation-delay: 0s; font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.6em; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; text-align: center; white-space: nowrap;">EARTH HARMONY</div>
-  <div class="intro-step" style="animation-delay: 0.2s; font-family: 'Cinzel', serif; color: var(--text-dim); font-size: 15px; letter-spacing: 5px; margin-top: 6px; text-transform: uppercase;">WELCOME</div>
-  <div class="spacer-lg"></div>
-  <div style="max-width: 340px; text-align: center; line-height: 2; color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: 22px;">
-    <div class="intro-step" style="animation-delay: 0.4s;">Choose a name</div>
-    <div class="intro-step" style="animation-delay: 0.8s;">Check in with how you're feeling</div>
-    <div class="intro-step" style="animation-delay: 1.2s;">Set an intention</div>
-    <div class="intro-step" style="animation-delay: 1.6s;">See what shifts</div>
-  </div>
-  <div class="spacer-lg"></div>
-  <div class="intro-step" style="animation-delay: 2.2s;">
-    <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-welcome')" style="font-size: 18px; padding: 16px 48px;">Begin</button>
+<!-- ==================== 1. WELCOME ==================== -->
+<div id="s-welcome" class="screen active">
+  <div style="display:flex; gap:8px; justify-content:center; margin-top:12px;">
+    <button class="theme-btn active" onclick="setTheme('forest')" id="themeForest" style="padding:5px 14px; border-radius:20px; border:1.5px solid var(--gold); background:linear-gradient(135deg,#1a3322,#0d1f12); color:var(--gold); font-size:11px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Forest</button>
+    <button class="theme-btn" onclick="setTheme('midnight')" id="themeMidnight" style="padding:5px 14px; border-radius:20px; border:1.5px solid rgba(212,175,55,0.3); background:linear-gradient(135deg,#0a0a0f,#111118); color:var(--text-dim); font-size:11px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Midnight</button>
   </div>
   <div class="spacer"></div>
-  <div class="intro-step" style="animation-delay: 2.6s; color: var(--text-dim); font-size: 15px; font-style: italic;">takes about 1 minute</div>
-</div>
-
-<!-- ==================== 1. WELCOME ==================== -->
-<div id="s-welcome" class="screen">
-  <div class="spacer-lg"></div>
-  <div class="logo-mark" style="width:130px;height:130px;">
+  <div class="logo-mark" style="width:100px;height:100px;">
     <svg viewBox="0 0 100 100" style="width:100%;height:100%;">
       <style>
         @keyframes logoGlow {
@@ -1259,12 +1240,19 @@
   </div>
   <div class="spacer"></div>
   <div style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.4em; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-align: center;">EARTH HARMONY</div>
-  <div style="font-family: 'Cinzel', serif; color: var(--text-dim); font-size: 16px; letter-spacing: 4px; margin-top: 6px; text-transform: uppercase; font-weight: 400;">SOUND BATH PORTAL</div>
-  <div class="spacer-lg"></div>
+  <div style="font-family: 'Cinzel', serif; color: var(--text-dim); font-size: 14px; letter-spacing: 4px; margin-top: 6px; text-transform: uppercase; font-weight: 400;">Sound Bath Portal</div>
+  <div class="spacer"></div>
+  <div style="max-width: 300px; text-align: center; line-height: 2; color: var(--text-dim); font-family: 'Cormorant Garamond', serif; font-size: 18px;">
+    <div>Choose a name</div>
+    <div>Check in</div>
+    <div>Set an intention</div>
+    <div>See what shifts</div>
+  </div>
+  <div class="spacer"></div>
   <input type="text" class="text-input" id="nameInput" placeholder="what should we call you?" maxlength="20" autocomplete="off">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; opacity: 0.4; font-style: italic;">eg. GoldenWeaver · RebelHugz7 · WildBear</div>
   <div class="spacer"></div>
-  <button class="btn" id="enterBtn" onclick="enterPortal()" disabled>Enter</button>
+  <button class="btn btn-solid" id="enterBtn" onclick="playPortalChime(); enterPortal()" disabled>Begin</button>
   <div class="nav-dots">
     <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
     <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
