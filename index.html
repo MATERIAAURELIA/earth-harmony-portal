@@ -1375,6 +1375,7 @@
     </div>
     <div class="subtitle" style="font-size: 15px; opacity: 0.5;">Come back here when the journey is complete.</div>
     <button class="btn btn-solid" onclick="showPostCheckin()">Journey Complete →</button>
+    <button class="btn-skip" onclick="showScreen('s-intention')" style="opacity:0.4; font-size: 12px;">← Back</button>
   </div>
 </div>
 
@@ -1389,6 +1390,7 @@
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="initShiftWords(); showScreen('s-postshift')">Continue</button>
   <button class="btn-skip" onclick="initShiftWords(); showScreen('s-postshift')">Skip</button>
+  <button class="btn-skip" onclick="showScreen('s-journeycomplete')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Harvest menu -->
@@ -1522,6 +1524,7 @@
   <div class="cloud-container" id="beforeCloudContainer" style="min-height: 320px; height: 320px;"></div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="renderShiftCloud(); showScreen('s-shiftcloud')">See The Shift →</button>
+  <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- ==================== SHIFT CLOUD ==================== -->
@@ -1606,6 +1609,8 @@
   <div style="text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-dim); font-size: 15px;">
     "The sound doesn't heal you — it reminds you how."
   </div>
+
+  <button class="btn-skip" onclick="showScreen('s-shiftcloud')" style="opacity:0.4; font-size: 12px;">← Back</button>
 
   <div class="nav-dots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
