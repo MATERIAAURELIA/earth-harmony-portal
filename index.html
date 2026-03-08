@@ -1936,12 +1936,18 @@ function playPortalChime() {
 }
 
 function enterPortal() {
-  state.user = nameInput.value.trim();
-  localStorage.setItem('ehp_username', state.user);
-  haptic('medium');
-  playPortalChime();
-  initAvatars();
-  showScreen('s-avatar');
+  try {
+    state.user = nameInput.value.trim();
+    if (!state.user) return;
+    localStorage.setItem('ehp_username', state.user);
+    haptic('medium');
+    playPortalChime();
+    initAvatars();
+    showScreen('s-avatar');
+  } catch(e) {
+    alert('Error: ' + e.message);
+    console.error(e);
+  }
 }
 
 function submitIntention() {
