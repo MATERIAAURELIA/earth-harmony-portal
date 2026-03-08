@@ -1283,7 +1283,7 @@
   </div>
 </div>
 
-<!-- ==================== 3. PRE CHECK-IN ==================== -->
+<!-- ==================== 3a. PRE CHECK-IN: Words ==================== -->
 <div id="s-precheckin" class="screen">
   <div class="spacer"></div>
   <div class="title">How Are You Arriving?</div>
@@ -1295,17 +1295,25 @@
     <button class="btn" onclick="addCustomFeeling()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
-  <div class="title" style="font-size: 20px;">Right now, I feel...</div>
-  <div class="spacer"></div>
-  <div class="slider-group" id="preSliders"></div>
-  <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); submitPreCheckin()">I'm Ready</button>
-  <button class="btn-skip" onclick="skipPreCheckin()">Skip</button>
+  <button class="btn btn-solid" onclick="playPortalChime(); buildSliders('preSliders','pre'); showScreen('s-presliders')">Continue</button>
+  <button class="btn-skip" onclick="buildSliders('preSliders','pre'); showScreen('s-presliders')">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-avatar')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
     <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
   </div>
+</div>
+
+<!-- ==================== 3b. PRE CHECK-IN: Sliders ==================== -->
+<div id="s-presliders" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-size: 20px;">Right Now, I Feel...</div>
+  <div class="spacer"></div>
+  <div class="slider-group" id="preSliders"></div>
+  <div class="spacer"></div>
+  <button class="btn btn-solid" onclick="playPortalChime(); submitPreCheckin()">I'm Ready</button>
+  <button class="btn-skip" onclick="skipPreCheckin()">Skip</button>
+  <button class="btn-skip" onclick="showScreen('s-precheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- ==================== 4. COMMUNITY VIBE (word cloud) ==================== -->
@@ -1830,9 +1838,6 @@ function initPreCheckin() {
   document.getElementById('customFeeling').addEventListener('keydown', e => {
     if (e.key === 'Enter') addCustomFeeling();
   });
-
-  // Sliders
-  buildSliders('preSliders', 'pre');
 }
 
 function addCustomFeeling() {
