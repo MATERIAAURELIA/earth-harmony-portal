@@ -2202,16 +2202,12 @@ function initInstruments() {
 }
 
 // ==================== POST: PHENOMENA ====================
-const PHENOMENA = [
-  'My mind went quiet',
-  'I had a vision or image',
-  'I journeyed somewhere',
-  'I released emotion',
-  'I had an insight',
-  'I fell asleep',
-  'I felt vibrations in my body',
-  'I lost track of time',
+const PHENOMENA_GROUPS = [
+  { label: 'Mind', items: ['My mind went quiet', 'I had a vision or image', 'I lost track of time'] },
+  { label: 'Body', items: ['I released pain or tension', 'My nervous system settled', 'I felt vibrations in my body'] },
+  { label: 'Spirit', items: ['I felt at peace', 'I felt connected to something bigger', 'I journeyed somewhere', 'I feel renewed'] },
 ];
+const PHENOMENA = PHENOMENA_GROUPS.flatMap(g => g.items);
 
 let phenomenaInited = false;
 function initPhenomena() {
@@ -2220,20 +2216,26 @@ function initPhenomena() {
   const grid = document.getElementById('phenomenaGrid');
   grid.innerHTML = '';
   state.phenomena = [];
-  PHENOMENA.forEach(p => {
-    const chip = document.createElement('div');
-    chip.className = 'word-chip';
-    chip.textContent = p;
-    chip.onclick = () => {
-      chip.classList.toggle('selected');
-      haptic('light');
-      if (chip.classList.contains('selected')) {
-        state.phenomena.push(p);
-      } else {
-        state.phenomena = state.phenomena.filter(x => x !== p);
-      }
-    };
-    grid.appendChild(chip);
+  PHENOMENA_GROUPS.forEach(group => {
+    const header = document.createElement('div');
+    header.style.cssText = 'width:100%;font-family:Cinzel,serif;font-size:13px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:12px;margin-bottom:4px;';
+    header.textContent = group.label;
+    grid.appendChild(header);
+    group.items.forEach(p => {
+      const chip = document.createElement('div');
+      chip.className = 'word-chip';
+      chip.textContent = p;
+      chip.onclick = () => {
+        chip.classList.toggle('selected');
+        haptic('light');
+        if (chip.classList.contains('selected')) {
+          state.phenomena.push(p);
+        } else {
+          state.phenomena = state.phenomena.filter(x => x !== p);
+        }
+      };
+      grid.appendChild(chip);
+    });
   });
   document.getElementById('customPhenomenon').addEventListener('keydown', e => {
     if (e.key === 'Enter') addCustomPhenomenon();
