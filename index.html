@@ -1121,7 +1121,7 @@
   </div>
   <div class="spacer-lg"></div>
   <div class="intro-step" style="animation-delay: 2.2s;">
-    <button class="btn btn-solid" onclick="showScreen('s-welcome')" style="font-size: 18px; padding: 16px 48px;">Begin</button>
+    <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-welcome')" style="font-size: 18px; padding: 16px 48px;">Begin</button>
   </div>
   <div class="spacer"></div>
   <div class="intro-step" style="animation-delay: 2.6s; color: var(--text-dim); font-size: 15px; font-style: italic;">takes about 1 minute</div>
@@ -1241,7 +1241,7 @@
   <input type="text" class="text-input" id="intentionInput" placeholder="I am open to..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; font-style: italic;">(or let it find you)</div>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="submitIntention()">Continue</button>
+  <button class="btn btn-solid" onclick="playPortalChime(); submitIntention()">Continue</button>
   <button class="btn-skip" onclick="skipIntention()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-journey')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1258,7 +1258,7 @@
   <div class="spacer"></div>
   <div class="avatar-grid" id="avatarGrid"></div>
   <div class="spacer"></div>
-  <button class="btn" onclick="submitAvatar()">Continue</button>
+  <button class="btn" onclick="playPortalChime(); submitAvatar()">Continue</button>
   <button class="btn-skip" onclick="submitAvatar()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-welcome')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1280,7 +1280,7 @@
   <div class="spacer"></div>
   <div class="slider-group" id="preSliders"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="submitPreCheckin()">I'm Ready</button>
+  <button class="btn btn-solid" onclick="playPortalChime(); submitPreCheckin()">I'm Ready</button>
   <button class="btn-skip" onclick="skipPreCheckin()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-avatar')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1348,7 +1348,7 @@
   <div class="word-grid" id="instrumentGrid"></div>
   <div class="spacer"></div>
   
-  <button class="btn btn-solid" onclick="submitPostCheckin()">Complete</button>
+  <button class="btn btn-solid" onclick="playPortalChime(); submitPostCheckin()">Complete</button>
   <button class="btn-skip" onclick="submitPostCheckin()">Skip to results</button>
   <div class="nav-dots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
