@@ -726,21 +726,23 @@
 
   /* ==================== AVATAR PICKER ==================== */
   .avatar-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
   }
 
   .avatar-option {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 1.5px solid var(--accent);
     background: var(--bg2);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    gap: 16px;
     cursor: pointer;
     transition: all 0.3s;
     font-size: 28px;
@@ -748,16 +750,17 @@
   }
 
   .avatar-option .avatar-label {
-    font-size: 8px;
-    color: var(--text-dim);
-    margin-top: 2px;
-    letter-spacing: 0.5px;
+    font-size: 16px;
+    color: var(--text);
+    letter-spacing: 2px;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
   }
 
   .avatar-option.selected {
     border-color: var(--gold);
     box-shadow: 0 0 16px var(--gold-glow);
-    background: rgba(212, 162, 78, 0.08);
+    background: rgba(212, 175, 55, 0.08);
   }
 
   /* ==================== MANDALA CANVAS ==================== */
@@ -1250,8 +1253,8 @@
 <!-- ==================== 2. AVATAR ==================== -->
 <div id="s-avatar" class="screen">
   <div class="spacer"></div>
-  <div class="title">Choose Your Spirit</div>
-  <div class="subtitle">Who are you tonight?</div>
+  <div class="title">Choose Your Archetype</div>
+  <div class="subtitle">What energy are you bringing?</div>
   <div class="spacer"></div>
   <div class="avatar-grid" id="avatarGrid"></div>
   <div class="spacer"></div>
@@ -1566,14 +1569,13 @@ const INSTRUMENTS = [
 ];
 
 const AVATARS = [
-  { emoji: '🧝', label: 'Sage' },
   { emoji: '⚔️', label: 'Warrior' },
+  { emoji: '🧝', label: 'Sage' },
   { emoji: '🧚', label: 'Pixie' },
   { emoji: '🐉', label: 'Dragon' },
-  { emoji: '🌿', label: 'Healer' },
+  { emoji: '🌿', label: 'Elemental' },
+  { emoji: '🐾', label: 'Animal' },
   { emoji: '🔮', label: 'Mystic' },
-  { emoji: '🦅', label: 'Eagle' },
-  { emoji: '🌊', label: 'Wave' },
 ];
 
 const BRUSH_COLORS = [
