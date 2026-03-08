@@ -1316,8 +1316,8 @@
   <div class="spacer"></div>
   <div class="word-grid" id="preWordGrid"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center;">
-    <input type="text" class="custom-feeling" id="customFeeling" placeholder="+ add your own" maxlength="24" style="flex:1;">
-    <button class="btn" onclick="addCustomFeeling()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+    <input type="text" class="custom-feeling" id="customFeeling" onkeydown="if(event.key==='Enter'){addCustomFeeling();event.preventDefault();}" placeholder="+ add your own" maxlength="24" style="flex:1;">
+    <button class="btn" onclick="addCustomFeeling()" ontouchend="addCustomFeeling()" style="padding:10px 16px; font-size:15px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="buildSliders('preSliders','pre'); showScreen('s-presliders')">Continue</button>
@@ -1453,8 +1453,8 @@
   <div class="spacer"></div>
   <div class="word-grid" id="phenomenaGrid"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
-    <input type="text" class="custom-feeling" id="customPhenomenon" placeholder="+ add your own" maxlength="30" style="flex:1;">
-    <button class="btn" onclick="addCustomPhenomenon()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+    <input type="text" class="custom-feeling" id="customPhenomenon" onkeydown="if(event.key==='Enter'){addCustomPhenomenon();event.preventDefault();}" placeholder="+ add your own" maxlength="30" style="flex:1;">
+    <button class="btn" onclick="addCustomPhenomenon()" ontouchend="addCustomPhenomenon()" style="padding:10px 16px; font-size:15px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
@@ -1469,8 +1469,8 @@
   <div class="spacer"></div>
   <div class="word-grid" id="shiftWordGrid"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
-    <input type="text" class="custom-feeling" id="customShift" placeholder="+ add your own" maxlength="24" style="flex:1;">
-    <button class="btn" onclick="addCustomShift()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+    <input type="text" class="custom-feeling" id="customShift" placeholder="+ add your own" maxlength="24" style="flex:1;" onkeydown="if(event.key==='Enter'){addCustomShift();event.preventDefault();}">
+    <button class="btn" onclick="addCustomShift()" ontouchend="addCustomShift()" style="padding:10px 16px; font-size:15px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Continue</button>
@@ -1485,8 +1485,8 @@
   <div class="spacer"></div>
   <div class="word-grid" id="instrumentGrid"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
-    <input type="text" class="custom-feeling" id="customInstrument" placeholder="+ add your own" maxlength="24" style="flex:1;">
-    <button class="btn" onclick="addCustomInstrument()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+    <input type="text" class="custom-feeling" id="customInstrument" onkeydown="if(event.key==='Enter'){addCustomInstrument();event.preventDefault();}" placeholder="+ add your own" maxlength="24" style="flex:1;">
+    <button class="btn" onclick="addCustomInstrument()" ontouchend="addCustomInstrument()" style="padding:10px 16px; font-size:15px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
@@ -1566,10 +1566,12 @@
   <div class="title" style="font-size: 18px; margin-bottom: 4px;">Continue Your Journey</div>
   <div class="spacer"></div>
   <div class="portal-grid">
+    <!-- Art hidden for now
     <a class="portal-link" onclick="showMandala()">
       <span class="portal-icon">🎨</span>
       <span class="portal-label">Integrate</span>
     </a>
+    -->
     <a class="portal-link" onclick="showCommunity()">
       <span class="portal-icon">✨</span>
       <span class="portal-label">Community</span>
