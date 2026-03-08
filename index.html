@@ -1271,10 +1271,9 @@
   <div class="spacer-lg"></div>
   <input type="text" class="text-input" id="intentionInput" placeholder="My intention is..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; font-style: italic;">(or let it find you)</div>
-  <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
-    <button class="btn btn-solid" onclick="submitIntention(true)" style="font-size:14px;">Share to Board ✨</button>
-    <button class="btn btn-solid" onclick="submitIntention(false)" style="font-size:14px; background:rgba(212,175,55,0.1); border:1.5px solid var(--gold-dim);">Keep Private 🔒</button>
-  </div>
+  <div class="spacer"></div>
+  <button class="btn btn-solid" onclick="submitIntention(true)">Continue</button>
+  <button class="btn-skip" onclick="submitIntention(false)">Keep private</button>
   <button class="btn-skip" onclick="skipIntention()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-journey')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
