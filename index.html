@@ -1830,11 +1830,13 @@ function joinSession(code) {
     if (data) {
       allData = Object.values(data);
       save();
-      // Re-render word cloud if visible
+      // Re-render any visible clouds in real-time
       const journeyScreen = document.getElementById('s-journey');
-      if (journeyScreen && journeyScreen.classList.contains('active')) {
-        renderWordCloud();
-      }
+      if (journeyScreen && journeyScreen.classList.contains('active')) renderWordCloud();
+      const beforeScreen = document.getElementById('s-beforecloud');
+      if (beforeScreen && beforeScreen.classList.contains('active')) renderBeforeCloud();
+      const shiftScreen = document.getElementById('s-shiftcloud');
+      if (shiftScreen && shiftScreen.classList.contains('active')) renderShiftCloud();
     }
   });
 }
