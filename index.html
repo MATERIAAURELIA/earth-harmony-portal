@@ -1414,9 +1414,26 @@
   <div class="spacer"></div>
   <div class="word-grid" id="phenomenaGrid"></div>
   <div class="spacer"></div>
+  <button class="btn btn-solid" onclick="initShiftWords(); showScreen('s-postshift')">Continue</button>
+  <button class="btn-skip" onclick="initShiftWords(); showScreen('s-postshift')">Skip</button>
+  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
+<!-- POST: The Shift — exit words -->
+<div id="s-postshift" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-size: 20px;">The Shift</div>
+  <div class="subtitle">What are you leaving with?</div>
+  <div class="spacer"></div>
+  <div class="word-grid" id="shiftWordGrid"></div>
+  <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
+    <input type="text" class="custom-feeling" id="customShift" placeholder="+ add your own" maxlength="24" style="flex:1;">
+    <button class="btn" onclick="addCustomShift()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+  </div>
+  <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postsounds')">Continue</button>
   <button class="btn-skip" onclick="showScreen('s-postsounds')">Skip</button>
-  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn-skip" onclick="showScreen('s-postphenomena')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Which sounds -->
@@ -1685,6 +1702,7 @@ let state = {
   instrument: null,
   instruments: [],
   phenomena: [],
+  shiftWords: [],
 };
 
 // Check URL for session code
@@ -2146,6 +2164,60 @@ function initPhenomena() {
   });
 }
 
+// ==================== POST: SHIFT WORDS ====================
+const SHIFT_WORDS = [
+  'Peace', 'Release', 'Clarity', 'Stillness',
+  'Connection', 'Gratitude', 'Lightness', 'Surrender',
+  'Joy', 'Awe', 'Grounded', 'Renewed',
+];
+
+function initShiftWords() {
+  const grid = document.getElementById('shiftWordGrid');
+  grid.innerHTML = '';
+  state.shiftWords = [];
+  SHIFT_WORDS.forEach(word => {
+    const chip = document.createElement('div');
+    chip.className = 'word-chip';
+    chip.textContent = word;
+    chip.onclick = () => {
+      chip.classList.toggle('selected');
+      haptic('light');
+      if (chip.classList.contains('selected')) {
+        state.shiftWords.push(word);
+      } else {
+        state.shiftWords = state.shiftWords.filter(w => w !== word);
+      }
+    };
+    grid.appendChild(chip);
+  });
+  document.getElementById('customShift').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addCustomShift();
+  });
+}
+
+function addCustomShift() {
+  const input = document.getElementById('customShift');
+  const word = input.value.trim();
+  if (!word) return;
+  state.shiftWords.push(word);
+  const grid = document.getElementById('shiftWordGrid');
+  const chip = document.createElement('div');
+  chip.className = 'word-chip selected';
+  chip.textContent = word;
+  chip.onclick = () => {
+    chip.classList.toggle('selected');
+    haptic('light');
+    if (chip.classList.contains('selected')) {
+      state.shiftWords.push(word);
+    } else {
+      state.shiftWords = state.shiftWords.filter(w => w !== word);
+    }
+  };
+  grid.appendChild(chip);
+  input.value = '';
+  haptic('medium');
+}
+
 function addCustomInstrument() {
   const input = document.getElementById('customInstrument');
   const inst = input.value.trim();
@@ -2191,6 +2263,7 @@ function submitPostCheckin() {
     instrument: state.instrument,
     instruments: [...state.instruments],
     phenomena: [...state.phenomena],
+    shiftWords: [...state.shiftWords],
     time: Date.now(),
     session: sessionId,
   };
