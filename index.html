@@ -1449,7 +1449,8 @@
 <div id="s-postphenomena" class="screen">
   <div class="spacer"></div>
   <div class="title" style="font-size: 20px;">What Happened In There?</div>
-  <div class="subtitle">Tap anything you experienced</div>
+  <div style="font-size: 12px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px;">Mind · Body · Spirit</div>
+  <div class="subtitle" style="margin-top: 6px;">Tap anything you experienced</div>
   <div class="spacer"></div>
   <div class="word-grid" id="phenomenaGrid"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
@@ -2212,26 +2213,20 @@ function initPhenomena() {
   const grid = document.getElementById('phenomenaGrid');
   grid.innerHTML = '';
   state.phenomena = [];
-  PHENOMENA_GROUPS.forEach(group => {
-    const header = document.createElement('div');
-    header.style.cssText = 'width:100%;font-family:Cinzel,serif;font-size:13px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:12px;margin-bottom:4px;';
-    header.textContent = group.label;
-    grid.appendChild(header);
-    group.items.forEach(p => {
-      const chip = document.createElement('div');
-      chip.className = 'word-chip';
-      chip.textContent = p;
-      chip.onclick = () => {
-        chip.classList.toggle('selected');
-        haptic('light');
-        if (chip.classList.contains('selected')) {
-          state.phenomena.push(p);
-        } else {
-          state.phenomena = state.phenomena.filter(x => x !== p);
-        }
-      };
-      grid.appendChild(chip);
-    });
+  PHENOMENA.forEach(p => {
+    const chip = document.createElement('div');
+    chip.className = 'word-chip';
+    chip.textContent = p;
+    chip.onclick = () => {
+      chip.classList.toggle('selected');
+      haptic('light');
+      if (chip.classList.contains('selected')) {
+        state.phenomena.push(p);
+      } else {
+        state.phenomena = state.phenomena.filter(x => x !== p);
+      }
+    };
+    grid.appendChild(chip);
   });
   document.getElementById('customPhenomenon').addEventListener('keydown', e => {
     if (e.key === 'Enter') addCustomPhenomenon();
