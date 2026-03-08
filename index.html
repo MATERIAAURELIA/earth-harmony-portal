@@ -1146,6 +1146,10 @@
 
 <!-- ==================== 0. INTRO ==================== -->
 <div id="s-intro" class="screen active">
+  <div style="display:flex; gap:8px; justify-content:center; margin-top:16px;">
+    <button class="theme-btn active" onclick="setTheme('forest')" id="themeForest" style="padding:6px 16px; border-radius:20px; border:1.5px solid var(--gold); background:linear-gradient(135deg,#1a3322,#0d1f12); color:var(--gold); font-size:12px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Forest</button>
+    <button class="theme-btn" onclick="setTheme('midnight')" id="themeMidnight" style="padding:6px 16px; border-radius:20px; border:1.5px solid rgba(212,175,55,0.3); background:linear-gradient(135deg,#0a0a0f,#111118); color:var(--text-dim); font-size:12px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Midnight</button>
+  </div>
   <div class="spacer-lg"></div>
   <div class="intro-step" style="animation-delay: 0s; font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.6em; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; text-align: center; white-space: nowrap;">EARTH HARMONY</div>
   <div class="intro-step" style="animation-delay: 0.2s; font-family: 'Cinzel', serif; color: var(--text-dim); font-size: 15px; letter-spacing: 5px; margin-top: 6px; text-transform: uppercase;">WELCOME</div>
@@ -1340,7 +1344,7 @@
 <!-- ==================== 4. COMMUNITY VIBE (word cloud) ==================== -->
 <div id="s-journey" class="screen" style="padding: 12px 8px;">
   <div style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 16px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px;">Current Community Vibe</div>
-  <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 8px;"><span id="participantCount">0</span> souls checked in</div>
+  <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 8px;"><span id="participantCount">0</span> present</div>
   <div class="cloud-container" id="cloudContainer"></div>
   <div id="intentionEcho" style="display:none; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 14px; margin-top: 8px; opacity: 0.7;"></div>
   <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 12px 0;">
@@ -1670,6 +1674,31 @@ let state = {
 };
 
 // Check URL for session code
+// Theme
+function setTheme(theme) {
+  if (theme === 'forest') {
+    document.body.style.background = 'linear-gradient(160deg, #1a3322 0%, #143a25 20%, #0d1f12 45%, #0a1a0d 70%, #061008 100%)';
+    document.documentElement.style.setProperty('--bg', '#0a1a0d');
+    document.documentElement.style.setProperty('--bg2', '#0d1f12');
+    document.documentElement.style.setProperty('--bg3', '#1a3322');
+  } else {
+    document.body.style.background = 'linear-gradient(160deg, #111118 0%, #0d0d14 40%, #0a0a0f 70%, #050508 100%)';
+    document.documentElement.style.setProperty('--bg', '#0a0a0f');
+    document.documentElement.style.setProperty('--bg2', '#111118');
+    document.documentElement.style.setProperty('--bg3', '#1a1a24');
+  }
+  document.body.style.backgroundAttachment = 'fixed';
+  // Toggle button states
+  document.getElementById('themeForest').style.borderColor = theme === 'forest' ? 'var(--gold)' : 'rgba(212,175,55,0.3)';
+  document.getElementById('themeForest').style.color = theme === 'forest' ? 'var(--gold)' : 'var(--text-dim)';
+  document.getElementById('themeMidnight').style.borderColor = theme === 'midnight' ? 'var(--gold)' : 'rgba(212,175,55,0.3)';
+  document.getElementById('themeMidnight').style.color = theme === 'midnight' ? 'var(--gold)' : 'var(--text-dim)';
+  localStorage.setItem('ehp_theme', theme);
+}
+// Restore saved theme
+const savedTheme = localStorage.getItem('ehp_theme') || 'forest';
+if (savedTheme !== 'forest') setTheme(savedTheme);
+
 const urlParams = new URLSearchParams(window.location.search);
 let sessionId = urlParams.get('session') || localStorage.getItem('ehp_session') || newSessionId();
 let allData = JSON.parse(localStorage.getItem('ehp_data') || '[]');
@@ -2174,7 +2203,7 @@ function renderResults() {
   const roomV = document.getElementById('roomBarsVertical');
   roomV.innerHTML = '';
   const completions = allData.filter(d => d.session === sessionId && d.type === 'complete');
-  document.getElementById('roomCount').textContent = completions.length + ' souls';
+  document.getElementById('roomCount').textContent = completions.length + ' present';
 
   if (completions.length > 0) {
     CATEGORIES.forEach(cat => {
