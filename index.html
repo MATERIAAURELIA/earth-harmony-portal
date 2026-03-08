@@ -1804,11 +1804,11 @@ function setTheme(theme) {
     document.documentElement.style.setProperty('--bg3', '#1a1a24');
   }
   document.body.style.backgroundAttachment = 'fixed';
-  // Toggle button states
-  document.getElementById('themeForest').style.borderColor = theme === 'forest' ? 'var(--gold)' : 'rgba(212,175,55,0.3)';
-  document.getElementById('themeForest').style.color = theme === 'forest' ? 'var(--gold)' : 'var(--text-dim)';
-  document.getElementById('themeMidnight').style.borderColor = theme === 'midnight' ? 'var(--gold)' : 'rgba(212,175,55,0.3)';
-  document.getElementById('themeMidnight').style.color = theme === 'midnight' ? 'var(--gold)' : 'var(--text-dim)';
+  // Toggle button states (guard: buttons may be hidden/commented out)
+  const themeF = document.getElementById('themeForest');
+  const themeM = document.getElementById('themeMidnight');
+  if (themeF) { themeF.style.borderColor = theme === 'forest' ? 'var(--gold)' : 'rgba(212,175,55,0.3)'; themeF.style.color = theme === 'forest' ? 'var(--gold)' : 'var(--text-dim)'; }
+  if (themeM) { themeM.style.borderColor = theme === 'midnight' ? 'var(--gold)' : 'rgba(212,175,55,0.3)'; themeM.style.color = theme === 'midnight' ? 'var(--gold)' : 'var(--text-dim)'; }
   localStorage.setItem('ehp_theme', theme);
 }
 // Restore saved theme
