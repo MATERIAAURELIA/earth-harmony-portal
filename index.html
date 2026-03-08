@@ -1387,8 +1387,8 @@
   <div class="spacer"></div>
   <div class="slider-group" id="postSliders"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Continue</button>
-  <button class="btn-skip" onclick="showScreen('s-postharvest')">Skip</button>
+  <button class="btn btn-solid" onclick="initShiftWords(); showScreen('s-postshift')">Continue</button>
+  <button class="btn-skip" onclick="initShiftWords(); showScreen('s-postshift')">Skip</button>
 </div>
 
 <!-- POST: Harvest menu -->
@@ -1398,7 +1398,10 @@
   <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; margin-top: 8px; line-height: 1.6; max-width: 300px;">
     Choose what feels right — use all, a few, or none.
   </div>
-  <div class="spacer-lg"></div>
+  <div style="font-size: 13px; color: var(--text-dim); margin-top: 12px; max-width: 280px; text-align: center; line-height: 1.5; opacity: 0.6;">
+    The insights you capture here grow with you over time.
+  </div>
+  <div class="spacer"></div>
   <div style="display:flex; flex-direction:column; gap:10px; width:100%; max-width:340px;">
     <div class="avatar-option" onclick="showScreen('s-postinsight')" style="cursor:pointer;">
       <span class="avatar-emoji-circle">🪶</span>
@@ -1414,13 +1417,6 @@
         <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">What happened in there?</span>
       </div>
     </div>
-    <div class="avatar-option" onclick="initShiftWords(); showScreen('s-postshift')" style="cursor:pointer;">
-      <span class="avatar-emoji-circle">🌀</span>
-      <div style="display:flex;flex-direction:column;">
-        <span class="avatar-label">The Shift</span>
-        <span style="font-size:11px;color:var(--text-dim);margin-top:2px;">What are you leaving with?</span>
-      </div>
-    </div>
     <div class="avatar-option" onclick="initInstruments(); showScreen('s-postsounds')" style="cursor:pointer;">
       <span class="avatar-emoji-circle">🎵</span>
       <div style="display:flex;flex-direction:column;">
@@ -1430,9 +1426,9 @@
     </div>
   </div>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="submitPostCheckin(); renderShiftCloud(); showScreen('s-shiftcloud')">I'm Complete</button>
-  <button class="btn-skip" onclick="submitPostCheckin(); renderShiftCloud(); showScreen('s-shiftcloud')">Skip all → Results</button>
-  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn btn-solid" onclick="submitPostCheckin(); renderBeforeCloud(); renderShiftCloud(); showScreen('s-shiftcloud')">I'm Complete</button>
+  <button class="btn-skip" onclick="submitPostCheckin(); renderBeforeCloud(); renderShiftCloud(); showScreen('s-shiftcloud')">Skip all</button>
+  <button class="btn-skip" onclick="showScreen('s-postshift')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Insight retrieval -->
@@ -1499,12 +1495,20 @@
 
 <!-- ==================== SHIFT CLOUD ==================== -->
 <div id="s-shiftcloud" class="screen">
-  <div class="spacer-lg"></div>
+  <div class="spacer"></div>
   <div class="title" style="font-family: 'Cinzel', serif; font-size: 22px;">The Room's Shift</div>
   <div style="font-size: 14px; color: var(--text-dim); margin-top: 4px;"><span id="shiftCloudCount">0</span> present</div>
   <div class="spacer"></div>
-  <div class="cloud-container" id="shiftCloudContainer" style="min-height: 300px;"></div>
-  <div class="spacer-lg"></div>
+  
+  <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">Arrived With</div>
+  <div class="cloud-container" id="beforeCloudContainer" style="min-height: 160px; height: 160px;"></div>
+  
+  <div style="font-size: 20px; color: var(--gold); margin: 8px 0;">↓</div>
+  
+  <div style="font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">Leaving With</div>
+  <div class="cloud-container" id="shiftCloudContainer" style="min-height: 160px; height: 160px;"></div>
+  
+  <div class="spacer"></div>
   <button class="btn btn-solid" onclick="renderResults(); showScreen('s-results')">See Your Results</button>
 </div>
 
@@ -2245,7 +2249,47 @@ function addCustomPhenomenon() {
   haptic('medium');
 }
 
-// ==================== SHIFT CLOUD (room-wide) ====================
+// ==================== BEFORE/AFTER CLOUDS (room-wide) ====================
+function renderBeforeCloud() {
+  const container = document.getElementById('beforeCloudContainer');
+  container.innerHTML = '';
+
+  const counts = {};
+  const checkins = allData.filter(d => d.session === sessionId && d.type === 'checkin' && d.feelings);
+  checkins.forEach(c => {
+    (c.feelings || []).forEach(w => { counts[w] = (counts[w] || 0) + 1; });
+  });
+
+  const words = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const maxCount = words.length > 0 ? words[0][1] : 1;
+  const w = container.clientWidth || 380;
+  const h = container.clientHeight || 160;
+  const cx = w / 2, cy = h / 2;
+
+  words.forEach(([word, count], i) => {
+    const el = document.createElement('div');
+    el.className = 'cloud-word';
+    el.textContent = word;
+    const scale = 0.5 + (count / maxCount) * 1.2;
+    const opacity = 0.3 + (count / maxCount) * 0.5;
+    let fontSize = i === 0 ? Math.max(20, Math.min(30, scale * 22)) : Math.max(11, Math.min(22, scale * 14));
+    el.style.fontSize = fontSize + 'px';
+    el.style.opacity = opacity;
+    el.style.color = 'var(--text-dim)';
+    if (i === 0) el.style.color = 'var(--before)';
+    const golden = 2.399963;
+    const angle = i * golden + (Math.random() - 0.5) * 0.5;
+    const baseR = 10 + Math.sqrt(i) * 22;
+    const rx = Math.min(baseR, w * 0.38);
+    const ry = Math.min(baseR * 0.6, h * 0.35);
+    const x = cx + Math.cos(angle) * rx - fontSize * word.length * 0.12;
+    const y = cy + Math.sin(angle) * ry - fontSize / 2;
+    el.style.left = Math.max(4, Math.min(w - 50, x)) + 'px';
+    el.style.top = Math.max(2, Math.min(h - 20, y)) + 'px';
+    container.appendChild(el);
+  });
+}
+
 function renderShiftCloud() {
   const container = document.getElementById('shiftCloudContainer');
   container.innerHTML = '';
