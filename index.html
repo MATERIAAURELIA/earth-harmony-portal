@@ -1346,34 +1346,48 @@
 </div>
 
 <!-- ==================== 5. POST CHECK-IN ==================== -->
+<!-- POST: Sliders -->
 <div id="s-postcheckin" class="screen">
   <div class="spacer"></div>
   <div class="title">Welcome Back</div>
-  <div class="subtitle">How do you feel now? Score from your gut.</div>
+  <div class="subtitle">How do you feel now?</div>
   <div class="spacer"></div>
   <div class="slider-group" id="postSliders"></div>
+  <div class="spacer"></div>
+  <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-postinsight')">Continue</button>
+  <button class="btn-skip" onclick="showScreen('s-postinsight')">Skip</button>
+</div>
+
+<!-- POST: Insight retrieval -->
+<div id="s-postinsight" class="screen">
   <div class="spacer-lg"></div>
-  
-  <!-- Insight retrieval -->
-  <div class="title" style="font-size: 20px;">🪶 Bring Something Back</div>
-  <div class="subtitle" style="font-style: italic;">
+  <div class="title" style="font-size: 22px;">🪶 Bring Something Back</div>
+  <div class="subtitle" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; margin-top: 12px; line-height: 1.6; max-width: 300px;">
     Like returning from a dream — name one insight before it fades.
   </div>
-  <div class="spacer"></div>
+  <div class="spacer-lg"></div>
   <textarea class="insight-area" id="insightText" placeholder="What do you want to remember from this journey?" rows="3"></textarea>
+  <div class="spacer-lg"></div>
+  <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-postsounds')">Continue</button>
+  <button class="btn-skip" onclick="showScreen('s-postsounds')">Skip</button>
+  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
+<!-- POST: Which sounds -->
+<div id="s-postsounds" class="screen">
   <div class="spacer"></div>
-  
-  <!-- Instrument that touched them -->
-  <div class="subtitle">Which sound touched you most? (optional)</div>
+  <div class="title" style="font-size: 20px;">Which Sounds Touched You?</div>
+  <div class="subtitle">Select all that resonated</div>
+  <div class="spacer"></div>
   <div class="word-grid" id="instrumentGrid"></div>
+  <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
+    <input type="text" class="custom-feeling" id="customInstrument" placeholder="+ add your own" maxlength="24" style="flex:1;">
+    <button class="btn" onclick="addCustomInstrument()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+  </div>
   <div class="spacer"></div>
-  
   <button class="btn btn-solid" onclick="playPortalChime(); submitPostCheckin()">Complete</button>
   <button class="btn-skip" onclick="submitPostCheckin()">Skip to results</button>
-  <div class="nav-dots">
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    <div class="dot"></div><div class="dot active"></div><div class="dot"></div>
-  </div>
+  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- ==================== 6. RESULTS & PORTAL ==================== -->
@@ -1623,6 +1637,7 @@ let state = {
   postScores: {},
   insight: '',
   instrument: null,
+  instruments: [],
 };
 
 // Check URL for session code
@@ -2002,18 +2017,56 @@ function showPostCheckin() {
 function initInstruments() {
   const grid = document.getElementById('instrumentGrid');
   grid.innerHTML = '';
+  state.instruments = [];
   INSTRUMENTS.forEach(inst => {
     const chip = document.createElement('div');
     chip.className = 'word-chip';
     chip.textContent = inst;
     chip.onclick = () => {
-      grid.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      state.instrument = inst;
+      chip.classList.toggle('selected');
+      haptic('light');
+      if (chip.classList.contains('selected')) {
+        state.instruments.push(inst);
+      } else {
+        state.instruments = state.instruments.filter(i => i !== inst);
+      }
+      state.instrument = state.instruments[0] || null;
       haptic('light');
     };
     grid.appendChild(chip);
   });
+  // Custom instrument Enter key
+  const custInput = document.getElementById('customInstrument');
+  if (custInput) {
+    custInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addCustomInstrument();
+    });
+  }
+}
+
+function addCustomInstrument() {
+  const input = document.getElementById('customInstrument');
+  const inst = input.value.trim();
+  if (!inst) return;
+  state.instruments.push(inst);
+  state.instrument = state.instruments[0] || null;
+  const grid = document.getElementById('instrumentGrid');
+  const chip = document.createElement('div');
+  chip.className = 'word-chip selected';
+  chip.textContent = inst;
+  chip.onclick = () => {
+    chip.classList.toggle('selected');
+    haptic('light');
+    if (chip.classList.contains('selected')) {
+      state.instruments.push(inst);
+    } else {
+      state.instruments = state.instruments.filter(i => i !== inst);
+    }
+    state.instrument = state.instruments[0] || null;
+  };
+  grid.appendChild(chip);
+  input.value = '';
+  haptic('medium');
 }
 
 function submitPostCheckin() {
@@ -2034,6 +2087,7 @@ function submitPostCheckin() {
     postScores: { ...state.postScores },
     insight: state.insight,
     instrument: state.instrument,
+    instruments: [...state.instruments],
     time: Date.now(),
     session: sessionId,
   };
