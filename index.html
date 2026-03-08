@@ -742,7 +742,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     gap: 14px;
     cursor: pointer;
     transition: all 0.3s;
@@ -1589,13 +1588,13 @@ const INSTRUMENTS = [
 ];
 
 const AVATARS = [
-  { emoji: '⚔️', label: 'Warrior' },
-  { emoji: '🧝', label: 'Sage' },
-  { emoji: '🧚', label: 'Pixie' },
-  { emoji: '🐉', label: 'Dragon' },
-  { emoji: '🌿', label: 'Elemental' },
-  { emoji: '🐾', label: 'Animal' },
-  { emoji: '🔮', label: 'Mystic' },
+  { emoji: '⚔️', label: 'Warrior', desc: 'courage & strength' },
+  { emoji: '💗', label: 'Lover', desc: 'heart & connection' },
+  { emoji: '🔥', label: 'Rebel', desc: 'freedom & truth' },
+  { emoji: '✨', label: 'Child', desc: 'wonder & play' },
+  { emoji: '🌿', label: 'Healer', desc: 'nurture & restore' },
+  { emoji: '🔮', label: 'Magician', desc: 'vision & transformation' },
+  { emoji: '🦉', label: 'Sage', desc: 'wisdom & reflection' },
 ];
 
 const BRUSH_COLORS = [
@@ -1772,7 +1771,7 @@ function initAvatars() {
   AVATARS.forEach(av => {
     const el = document.createElement('div');
     el.className = 'avatar-option';
-    el.innerHTML = `<span class="avatar-emoji-circle">${av.emoji}</span><span class="avatar-label">${av.label}</span>`;
+    el.innerHTML = `<span class="avatar-emoji-circle">${av.emoji}</span><div style="display:flex;flex-direction:column;"><span class="avatar-label">${av.label}</span><span style="font-size:11px;color:var(--text-dim);letter-spacing:0.5px;margin-top:2px;">${av.desc}</span></div>`;
     el.onclick = () => {
       grid.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
