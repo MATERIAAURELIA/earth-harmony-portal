@@ -2539,27 +2539,56 @@ function submitPostCheckin() {
 function renderResults() {
   const ba = document.getElementById('baContainer');
   ba.innerHTML = '';
-  ba.classList.add('ba-stacked');
 
+  // Find biggest shift
+  let biggestCat = null, biggestDelta = 0;
+  const deltas = {};
   CATEGORIES.forEach(cat => {
     const pre = state.preScores[cat.id] || 5;
     const post = state.postScores[cat.id] || 5;
-    const div = document.createElement('div');
-    div.className = 'ba-row';
     const delta = post - pre;
-    const deltaStr = delta > 0 ? `+${delta}` : delta === 0 ? '—' : `${delta}`;
-    const deltaClass = delta > 0 ? 'up' : delta < 0 ? 'down' : 'same';
-    const afterClass = delta > 0 ? 'improved' : delta < 0 ? 'declined' : '';
-    div.innerHTML = `
-      <div class="ba-label">${cat.name}</div>
-      <div class="ba-bars">
-        <div class="ba-bar ba-before" style="width: ${pre * 10}%">${pre}</div>
-        <div class="ba-bar ba-after ${afterClass}" style="width: ${post * 10}%">${post}</div>
-      </div>
-      <div class="ba-delta ${deltaClass}">${deltaStr}</div>
-    `;
-    ba.appendChild(div);
+    deltas[cat.id] = { delta, pre, post, name: cat.name };
+    if (Math.abs(delta) > Math.abs(biggestDelta)) {
+      biggestDelta = delta;
+      biggestCat = cat;
+    }
   });
+
+  // Hero: biggest shift
+  if (biggestCat && biggestDelta !== 0) {
+    const hero = document.createElement('div');
+    hero.style.cssText = 'text-align:center;margin-bottom:20px;';
+    const arrow = biggestDelta > 0 ? '↑' : '↓';
+    const sign = biggestDelta > 0 ? '+' : '';
+    hero.innerHTML = `
+      <div style="font-size:13px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">Your biggest shift</div>
+      <div style="font-family:Cinzel,serif;font-size:28px;color:var(--gold);margin-top:8px;">${biggestCat.name}</div>
+      <div style="font-size:36px;color:var(--gold);margin-top:4px;font-weight:700;">${sign}${biggestDelta} ${arrow}</div>
+    `;
+    ba.appendChild(hero);
+  } else {
+    const hero = document.createElement('div');
+    hero.style.cssText = 'text-align:center;margin-bottom:20px;';
+    hero.innerHTML = `<div style="font-family:Cinzel,serif;font-size:22px;color:var(--gold);">Steady State ⚖️</div>
+      <div style="font-size:13px;color:var(--text-dim);margin-top:6px;">You arrived balanced and stayed there</div>`;
+    ba.appendChild(hero);
+  }
+
+  // All deltas in a line
+  const line = document.createElement('div');
+  line.style.cssText = 'display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;';
+  CATEGORIES.forEach(cat => {
+    const d = deltas[cat.id];
+    const sign = d.delta > 0 ? '+' : '';
+    const color = d.delta > 0 ? 'var(--gold)' : d.delta < 0 ? 'var(--before)' : 'var(--text-dim)';
+    const val = d.delta === 0 ? '—' : `${sign}${d.delta}`;
+    const isBiggest = biggestCat && cat.id === biggestCat.id;
+    const span = document.createElement('span');
+    span.style.cssText = `font-size:${isBiggest ? '15px' : '14px'};color:${color};${isBiggest ? 'font-weight:700;' : ''}`;
+    span.textContent = `${cat.name} ${val}`;
+    line.appendChild(span);
+  });
+  ba.appendChild(line);
 
   // Room summary — vertical bars
   const roomV = document.getElementById('roomBarsVertical');
