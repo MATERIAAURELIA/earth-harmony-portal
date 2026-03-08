@@ -1856,11 +1856,11 @@ function buildSliders(containerId, prefix) {
         <span class="slider-name" style="font-weight:600; color:var(--gold); letter-spacing:1px; text-transform:uppercase; font-size:13px;">${cat.name}</span>
         <span>${cat.high}</span>
       </div>
-      <div class="slider-track" style="position:relative;">
+      <div class="slider-track">
         <input type="range" min="1" max="10" value="5" step="1"
           id="${prefix}_${cat.id}"
           oninput="onSlide('${prefix}', '${cat.id}', this.value)">
-        <div class="slider-bubble" id="${prefix}_val_${cat.id}" style="position:absolute; top:-28px; background:var(--gold); color:var(--bg); font-size:13px; font-weight:700; padding:2px 8px; border-radius:8px; pointer-events:none; transition:left 0.1s;">5</div>
+        <span class="slider-val" id="${prefix}_val_${cat.id}" style="display:none;">5</span>
       </div>
     `;
     container.appendChild(div);
@@ -1870,15 +1870,7 @@ function buildSliders(containerId, prefix) {
 let lastSliderVals = {};
 function onSlide(prefix, catId, val) {
   const key = prefix + '_' + catId;
-  const bubble = document.getElementById(`${prefix}_val_${catId}`);
-  bubble.textContent = val;
-  // Position bubble above thumb
-  const slider = document.getElementById(`${prefix}_${catId}`);
-  const pct = (val - 1) / 9;
-  const sliderW = slider.offsetWidth;
-  const thumbOffset = 10; // half thumb width
-  const left = thumbOffset + pct * (sliderW - 2 * thumbOffset);
-  bubble.style.left = (left - 14) + 'px';
+  document.getElementById(`${prefix}_val_${catId}`).textContent = val;
   if (lastSliderVals[key] !== val) {
     haptic('light');
     lastSliderVals[key] = val;
