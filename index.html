@@ -1147,10 +1147,12 @@
 <!-- ==================== 0. INTRO ==================== -->
 <!-- ==================== 1. WELCOME ==================== -->
 <div id="s-welcome" class="screen active">
+  <!-- Theme toggle hidden for now
   <div style="display:flex; gap:8px; justify-content:center; margin-top:12px;">
     <button class="theme-btn active" onclick="setTheme('forest')" id="themeForest" style="padding:5px 14px; border-radius:20px; border:1.5px solid var(--gold); background:linear-gradient(135deg,#1a3322,#0d1f12); color:var(--gold); font-size:11px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Forest</button>
     <button class="theme-btn" onclick="setTheme('midnight')" id="themeMidnight" style="padding:5px 14px; border-radius:20px; border:1.5px solid rgba(212,175,55,0.3); background:linear-gradient(135deg,#0a0a0f,#111118); color:var(--text-dim); font-size:11px; font-family:'Cinzel',serif; cursor:pointer; letter-spacing:1px;">Midnight</button>
   </div>
+  -->
   <div class="spacer"></div>
   <div class="logo-mark" style="width:100px;height:100px;">
     <svg viewBox="0 0 100 100" style="width:100%;height:100%;">
@@ -1811,7 +1813,7 @@ function setTheme(theme) {
 }
 // Restore saved theme
 const savedTheme = localStorage.getItem('ehp_theme') || 'forest';
-if (savedTheme !== 'forest') setTheme(savedTheme);
+setTheme('midnight');
 
 const urlParams = new URLSearchParams(window.location.search);
 let sessionId = urlParams.get('session') || localStorage.getItem('ehp_session') || newSessionId();
