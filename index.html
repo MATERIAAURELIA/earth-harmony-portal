@@ -1401,9 +1401,22 @@
   <div class="spacer-lg"></div>
   <textarea class="insight-area" id="insightText" placeholder="What do you want to remember from this journey?" rows="3"></textarea>
   <div class="spacer-lg"></div>
+  <button class="btn btn-solid" onclick="initPhenomena(); showScreen('s-postphenomena')">Continue</button>
+  <button class="btn-skip" onclick="initPhenomena(); showScreen('s-postphenomena')">Skip</button>
+  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
+<!-- POST: What happened in there? -->
+<div id="s-postphenomena" class="screen">
+  <div class="spacer"></div>
+  <div class="title" style="font-size: 20px;">What Happened In There?</div>
+  <div class="subtitle">Tap anything you experienced</div>
+  <div class="spacer"></div>
+  <div class="word-grid" id="phenomenaGrid"></div>
+  <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postsounds')">Continue</button>
   <button class="btn-skip" onclick="showScreen('s-postsounds')">Skip</button>
-  <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
+  <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
 <!-- POST: Which sounds -->
@@ -1671,6 +1684,7 @@ let state = {
   insight: '',
   instrument: null,
   instruments: [],
+  phenomena: [],
 };
 
 // Check URL for session code
@@ -2099,6 +2113,39 @@ function initInstruments() {
   }
 }
 
+// ==================== POST: PHENOMENA ====================
+const PHENOMENA = [
+  'My mind went quiet',
+  'I had a vision or image',
+  'I journeyed somewhere',
+  'I released emotion',
+  'I had an insight',
+  'I fell asleep',
+  'I felt vibrations in my body',
+  'I lost track of time',
+];
+
+function initPhenomena() {
+  const grid = document.getElementById('phenomenaGrid');
+  grid.innerHTML = '';
+  state.phenomena = [];
+  PHENOMENA.forEach(p => {
+    const chip = document.createElement('div');
+    chip.className = 'word-chip';
+    chip.textContent = p;
+    chip.onclick = () => {
+      chip.classList.toggle('selected');
+      haptic('light');
+      if (chip.classList.contains('selected')) {
+        state.phenomena.push(p);
+      } else {
+        state.phenomena = state.phenomena.filter(x => x !== p);
+      }
+    };
+    grid.appendChild(chip);
+  });
+}
+
 function addCustomInstrument() {
   const input = document.getElementById('customInstrument');
   const inst = input.value.trim();
@@ -2143,6 +2190,7 @@ function submitPostCheckin() {
     insight: state.insight,
     instrument: state.instrument,
     instruments: [...state.instruments],
+    phenomena: [...state.phenomena],
     time: Date.now(),
     session: sessionId,
   };
