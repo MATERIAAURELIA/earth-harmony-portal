@@ -23,9 +23,9 @@
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap');
 
   :root {
-    --gold: #D4A24E;
-    --gold-dim: #B8892E;
-    --gold-glow: rgba(212, 162, 78, 0.3);
+    --gold: #d4af37;
+    --gold-dim: #b8962e;
+    --gold-glow: rgba(212, 175, 55, 0.3);
     --gold-bright: #f4d574;
     --amber: #D4A24E;
     --bg: #0a1a0d;
@@ -1653,9 +1653,19 @@ function joinSession(code) {
 }
 
 function pushCheckin(data) {
-  // Push to Firebase
+  // Push to session in Firebase
   const ref = db.ref('sessions/' + sessionId + '/checkins');
   ref.push(data);
+  // Also save to user profile for cross-session history
+  if (state.user) {
+    const userKey = state.user.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    db.ref('users/' + userKey + '/checkins').push(data);
+    db.ref('users/' + userKey + '/profile').update({
+      displayName: state.user,
+      lastSeen: Date.now(),
+      lastSession: sessionId
+    });
+  }
 }
 
 // Auto-join session from URL or localStorage
@@ -1679,6 +1689,13 @@ function haptic(style = 'light') {
 // ==================== 1. WELCOME ====================
 const nameInput = document.getElementById('nameInput');
 const enterBtn = document.getElementById('enterBtn');
+
+// Auto-fill saved name
+const savedName = localStorage.getItem('ehp_username');
+if (savedName) {
+  nameInput.value = savedName;
+  enterBtn.disabled = false;
+}
 
 nameInput.addEventListener('input', () => {
   enterBtn.disabled = nameInput.value.trim().length === 0;
@@ -1710,6 +1727,7 @@ function playPortalChime() {
 
 function enterPortal() {
   state.user = nameInput.value.trim();
+  localStorage.setItem('ehp_username', state.user);
   haptic('medium');
   playPortalChime();
   initAvatars();
