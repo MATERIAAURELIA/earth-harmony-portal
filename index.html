@@ -1278,7 +1278,7 @@
   <input type="text" class="text-input" id="intentionInput" placeholder="My intention is..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; font-style: italic;">(or let it find you)</div>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); submitIntention()">Continue</button>
+  <button class="btn btn-solid" onclick="submitIntention()">Continue</button>
   <button class="btn-skip" onclick="skipIntention()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-journey')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1295,7 +1295,7 @@
   <div class="spacer"></div>
   <div class="avatar-grid" id="avatarGrid"></div>
   <div class="spacer"></div>
-  <button class="btn" onclick="playPortalChime(); submitAvatar()">Continue</button>
+  <button class="btn" onclick="submitAvatar()">Continue</button>
   <button class="btn-skip" onclick="submitAvatar()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-welcome')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1316,7 +1316,7 @@
     <button class="btn" onclick="addCustomFeeling()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); buildSliders('preSliders','pre'); showScreen('s-presliders')">Continue</button>
+  <button class="btn btn-solid" onclick="buildSliders('preSliders','pre'); showScreen('s-presliders')">Continue</button>
   <button class="btn-skip" onclick="buildSliders('preSliders','pre'); showScreen('s-presliders')">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-avatar')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1332,7 +1332,7 @@
   <div class="spacer"></div>
   <div class="slider-group" id="preSliders"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); submitPreCheckin()">I'm Ready</button>
+  <button class="btn btn-solid" onclick="submitPreCheckin()">I'm Ready</button>
   <button class="btn-skip" onclick="skipPreCheckin()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-precheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
@@ -1383,7 +1383,7 @@
   <div class="spacer"></div>
   <div class="slider-group" id="postSliders"></div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-postinsight')">Continue</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postinsight')">Continue</button>
   <button class="btn-skip" onclick="showScreen('s-postinsight')">Skip</button>
 </div>
 
@@ -1397,7 +1397,7 @@
   <div class="spacer-lg"></div>
   <textarea class="insight-area" id="insightText" placeholder="What do you want to remember from this journey?" rows="3"></textarea>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); showScreen('s-postsounds')">Continue</button>
+  <button class="btn btn-solid" onclick="showScreen('s-postsounds')">Continue</button>
   <button class="btn-skip" onclick="showScreen('s-postsounds')">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
@@ -1414,7 +1414,7 @@
     <button class="btn" onclick="addCustomInstrument()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
   </div>
   <div class="spacer"></div>
-  <button class="btn btn-solid" onclick="playPortalChime(); submitPostCheckin()">Complete</button>
+  <button class="btn btn-solid" onclick="submitPostCheckin()">Complete</button>
   <button class="btn-skip" onclick="submitPostCheckin()">Skip to results</button>
   <button class="btn-skip" onclick="showScreen('s-postinsight')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
