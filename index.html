@@ -1466,7 +1466,7 @@
   <div style="font-size: 12px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px;">Mind · Body · Spirit</div>
   <div class="subtitle" style="margin-top: 6px;">Tap anything you experienced</div>
   <div class="spacer"></div>
-  <div class="word-grid" id="phenomenaGrid"></div>
+  <div class="word-grid" id="phenomenaGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; max-width:340px;"></div>
   <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center; margin-top: 12px;">
     <input type="text" class="custom-feeling" id="customPhenomenon" onkeydown="if(event.key==='Enter'){addCustomPhenomenon();event.preventDefault();}" placeholder="+ add your own" maxlength="30" style="flex:1;">
     <button class="btn" onclick="addCustomPhenomenon()" ontouchend="addCustomPhenomenon()" style="padding:10px 16px; font-size:15px; white-space:nowrap;">Add</button>
@@ -2263,9 +2263,9 @@ function initInstruments() {
 
 // ==================== POST: PHENOMENA ====================
 const PHENOMENA_GROUPS = [
-  { label: 'Mind', items: ['My mind went quiet & I felt at peace', 'I had a vision or image', 'I lost track of time'] },
-  { label: 'Body', items: ['I released pain or tension', 'My nervous system settled', 'I felt vibrations in my body'] },
-  { label: 'Spirit', items: ['I felt connected to something bigger', 'I experienced insight', 'I journeyed somewhere', 'I feel renewed'] },
+  { label: 'Mind', items: ['My mind went quiet', 'I felt at peace', 'I had a vision or image', 'I lost track of time'] },
+  { label: 'Body', items: ['I released tension', 'I felt vibrations'] },
+  { label: 'Spirit', items: ['Connected to something bigger', 'I experienced insight', 'I journeyed somewhere', 'I feel renewed'] },
 ];
 const PHENOMENA = PHENOMENA_GROUPS.flatMap(g => g.items);
 
