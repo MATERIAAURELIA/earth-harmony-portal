@@ -1571,7 +1571,7 @@
 <div id="s-community" class="screen">
   <div class="spacer"></div>
   <div class="title">Community</div>
-  <div class="subtitle">Your journey, over time</div>
+  <div class="subtitle">Fellow travellers on this path</div>
   <div class="spacer"></div>
   <div class="room-summary" id="communityList"></div>
   <div class="spacer-lg"></div>
@@ -3223,9 +3223,11 @@ function showCommunity() {
       <div>
         <span style="font-size: 20px; margin-right: 8px;">${p.avatar ? p.avatar.emoji : '✨'}</span>
         <span class="room-stat-label">${p.name}${isSelf ? ' (you)' : ''}</span>
-        <span style="font-size: 11px; color: var(--text-dim); margin-left: 8px;">${p.streak}🔥</span>
       </div>
-      <div class="room-stat-value">${p.sessions}</div>
+      <div style="text-align:right;">
+        <div class="room-stat-value">${p.sessions} session${p.sessions !== 1 ? 's' : ''}</div>
+        ${p.streak > 1 ? `<div style="font-size:11px;color:var(--text-dim);">${p.streak} streak 🔥</div>` : ''}
+      </div>
     `;
     list.appendChild(div);
   });
