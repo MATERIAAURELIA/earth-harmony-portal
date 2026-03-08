@@ -1430,8 +1430,8 @@
     </div>
   </div>
   <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="submitPostCheckin()">I'm Complete</button>
-  <button class="btn-skip" onclick="submitPostCheckin()">Skip all → Results</button>
+  <button class="btn btn-solid" onclick="submitPostCheckin(); renderShiftCloud(); showScreen('s-shiftcloud')">I'm Complete</button>
+  <button class="btn-skip" onclick="submitPostCheckin(); renderShiftCloud(); showScreen('s-shiftcloud')">Skip all → Results</button>
   <button class="btn-skip" onclick="showScreen('s-postcheckin')" style="opacity:0.4; font-size: 12px;">← Back</button>
 </div>
 
@@ -1495,6 +1495,17 @@
   <div class="spacer"></div>
   <button class="btn btn-solid" onclick="showScreen('s-postharvest')">Done</button>
   <button class="btn-skip" onclick="showScreen('s-postharvest')" style="opacity:0.4; font-size: 12px;">← Back</button>
+</div>
+
+<!-- ==================== SHIFT CLOUD ==================== -->
+<div id="s-shiftcloud" class="screen">
+  <div class="spacer-lg"></div>
+  <div class="title" style="font-family: 'Cinzel', serif; font-size: 22px;">The Room's Shift</div>
+  <div style="font-size: 14px; color: var(--text-dim); margin-top: 4px;"><span id="shiftCloudCount">0</span> present</div>
+  <div class="spacer"></div>
+  <div class="cloud-container" id="shiftCloudContainer" style="min-height: 300px;"></div>
+  <div class="spacer-lg"></div>
+  <button class="btn btn-solid" onclick="renderResults(); showScreen('s-results')">See Your Results</button>
 </div>
 
 <!-- ==================== 6. RESULTS & PORTAL ==================== -->
@@ -2232,6 +2243,73 @@ function addCustomPhenomenon() {
   grid.appendChild(chip);
   input.value = '';
   haptic('medium');
+}
+
+// ==================== SHIFT CLOUD (room-wide) ====================
+function renderShiftCloud() {
+  const container = document.getElementById('shiftCloudContainer');
+  container.innerHTML = '';
+
+  const counts = {};
+  const completions = allData.filter(d => d.session === sessionId && d.type === 'complete' && d.shiftWords);
+  completions.forEach(c => {
+    (c.shiftWords || []).forEach(w => { counts[w] = (counts[w] || 0) + 1; });
+  });
+
+  document.getElementById('shiftCloudCount').textContent = completions.length;
+
+  const words = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const maxCount = words.length > 0 ? words[0][1] : 1;
+  const w = container.clientWidth || 380;
+  const h = container.clientHeight || 300;
+  const cx = w / 2, cy = h / 2;
+
+  words.forEach(([word, count], i) => {
+    const el = document.createElement('div');
+    el.className = 'cloud-word';
+    el.textContent = word;
+
+    const scale = 0.5 + (count / maxCount) * 1.5;
+    const opacity = 0.4 + (count / maxCount) * 0.6;
+
+    let fontSize;
+    if (i === 0) {
+      fontSize = Math.max(30, Math.min(44, scale * 30));
+      el.style.fontWeight = '700';
+      el.style.color = '#f0c850';
+      el.style.textShadow = '0 0 14px rgba(212,175,55,0.5), 0 0 28px rgba(212,175,55,0.25)';
+    } else {
+      fontSize = Math.max(14, Math.min(30, scale * 18));
+    }
+
+    el.style.fontSize = fontSize + 'px';
+    el.style.opacity = opacity;
+
+    if (count > 1 && i > 0) {
+      const glowStrength = Math.min(count * 5, 18);
+      el.style.color = '#f0c850';
+      el.style.textShadow = `0 0 ${glowStrength}px rgba(212,175,55,0.6)`;
+      el.style.fontWeight = '600';
+    }
+
+    const golden = 2.399963;
+    const angle = i * golden + (Math.random() - 0.5) * 0.5;
+    const baseR = 15 + Math.sqrt(i) * 32;
+    const jitter = (Math.random() - 0.5) * 20;
+    const rx = Math.min(baseR + jitter, w * 0.4);
+    const ry = Math.min(baseR + jitter * 0.6, h * 0.4);
+    const x = cx + Math.cos(angle) * rx - fontSize * word.length * 0.15;
+    const y = cy + Math.sin(angle) * ry - fontSize / 2;
+
+    el.style.left = Math.max(4, Math.min(w - 60, x)) + 'px';
+    el.style.top = Math.max(4, Math.min(h - 24, y)) + 'px';
+
+    container.appendChild(el);
+  });
+
+  if (words.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:var(--text-dim);padding:40px;font-style:italic;">Words will appear as people complete their check-out</div>';
+  }
 }
 
 // ==================== POST: SHIFT WORDS ====================
