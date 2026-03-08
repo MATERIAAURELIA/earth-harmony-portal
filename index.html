@@ -1271,8 +1271,10 @@
   <div class="spacer-lg"></div>
   <input type="text" class="text-input" id="intentionInput" placeholder="My intention is..." maxlength="80" autocomplete="off" style="font-size: 16px; font-style: italic;">
   <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px; font-style: italic;">(or let it find you)</div>
-  <div class="spacer-lg"></div>
-  <button class="btn btn-solid" onclick="submitIntention()">Continue</button>
+  <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+    <button class="btn btn-solid" onclick="submitIntention(true)" style="font-size:14px;">Share to Board ✨</button>
+    <button class="btn btn-solid" onclick="submitIntention(false)" style="font-size:14px; background:rgba(212,175,55,0.1); border:1.5px solid var(--gold-dim);">Keep Private 🔒</button>
+  </div>
   <button class="btn-skip" onclick="skipIntention()">Skip</button>
   <button class="btn-skip" onclick="showScreen('s-journey')" style="opacity:0.4; font-size: 12px;">← Back</button>
   <div class="nav-dots">
@@ -1363,6 +1365,7 @@
         <span style="font-size:13px; color:var(--text-dim);">✈️ Airplane Mode</span>
       </div>
     </div>
+    <div id="intentionBoard" style="display:none; width:100%; max-width:340px; margin-top:8px; text-align:center;"></div>
     <div class="subtitle" style="font-size: 15px; opacity: 0.5;">Come back here when the journey is complete.</div>
     <button class="btn btn-solid" onclick="showPostCheckin()">Journey Complete →</button>
     <button class="btn-skip" onclick="showScreen('s-intention')" style="opacity:0.4; font-size: 12px;">← Back</button>
@@ -1950,16 +1953,50 @@ function enterPortal() {
   }
 }
 
-function submitIntention() {
+function submitIntention(share) {
   state.intention = document.getElementById('intentionInput').value.trim();
+  if (share && state.intention) {
+    db.ref('sessions/' + sessionId + '/intentions').push({
+      user: state.user,
+      intention: state.intention,
+      timestamp: Date.now()
+    });
+  }
   haptic('medium');
+  renderIntentionBoard();
   showScreen('s-journeycomplete');
 }
 
 function skipIntention() {
   state.intention = '';
   haptic('light');
+  renderIntentionBoard();
   showScreen('s-journeycomplete');
+}
+
+// ==================== INTENTION BOARD ====================
+let intentionBoardData = [];
+db.ref('sessions/' + sessionId + '/intentions').on('value', (snap) => {
+  const data = snap.val();
+  intentionBoardData = data ? Object.values(data) : [];
+  renderIntentionBoard();
+});
+
+function renderIntentionBoard() {
+  const container = document.getElementById('intentionBoard');
+  if (!container) return;
+  if (intentionBoardData.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'block';
+  container.innerHTML = '<div style="font-family:Cinzel,serif;font-size:14px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;text-transform:uppercase;">Community Intentions</div>';
+  intentionBoardData.forEach(item => {
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:10px;padding:10px 14px;margin-bottom:8px;text-align:left;';
+    card.innerHTML = `<span style="color:var(--gold);font-size:13px;font-weight:600;">${item.user}</span><br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text);font-size:15px;">"${item.intention}"</span>`;
+    container.appendChild(card);
+  });
 }
 
 // ==================== 2. AVATARS ====================
