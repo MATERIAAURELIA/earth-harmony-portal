@@ -2004,7 +2004,7 @@ function renderIntentionBoard() {
   intentionBoardData.forEach(item => {
     const card = document.createElement('div');
     card.style.cssText = 'background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:10px;padding:10px 14px;margin-bottom:8px;text-align:left;';
-    card.innerHTML = `<span style="color:var(--gold);font-size:13px;font-weight:600;">${item.user}</span><br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text);font-size:15px;">"${item.intention}"</span>`;
+    card.innerHTML = `<span style="color:var(--gold);font-size:16px;font-weight:600;">${item.user}</span><br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text);font-size:19px;">"${item.intention}"</span>`;
     container.appendChild(card);
   });
 }
