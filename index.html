@@ -1274,7 +1274,10 @@
   <div class="subtitle">Select what resonates. Be honest — this is for you.</div>
   <div class="spacer"></div>
   <div class="word-grid" id="preWordGrid"></div>
-  <input type="text" class="custom-feeling" id="customFeeling" placeholder="+ add your own" maxlength="24">
+  <div style="display:flex; gap:8px; width:100%; max-width:340px; align-items:center;">
+    <input type="text" class="custom-feeling" id="customFeeling" placeholder="+ add your own" maxlength="24" style="flex:1;">
+    <button class="btn" onclick="addCustomFeeling()" style="padding:8px 14px; font-size:14px; white-space:nowrap;">Add</button>
+  </div>
   <div class="spacer"></div>
   <div class="title" style="font-size: 20px;">Right now, I feel...</div>
   <div class="spacer"></div>
@@ -1791,8 +1794,37 @@ function initPreCheckin() {
     grid.appendChild(chip);
   });
 
+  // Custom feeling Enter key
+  document.getElementById('customFeeling').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addCustomFeeling();
+  });
+
   // Sliders
   buildSliders('preSliders', 'pre');
+}
+
+function addCustomFeeling() {
+  const input = document.getElementById('customFeeling');
+  const word = input.value.trim();
+  if (!word) return;
+  state.preFeelings.push(word);
+  // Add as selected chip
+  const grid = document.getElementById('preWordGrid');
+  const chip = document.createElement('div');
+  chip.className = 'word-chip selected';
+  chip.textContent = word;
+  chip.onclick = () => {
+    chip.classList.toggle('selected');
+    haptic('light');
+    if (chip.classList.contains('selected')) {
+      state.preFeelings.push(word);
+    } else {
+      state.preFeelings = state.preFeelings.filter(w => w !== word);
+    }
+  };
+  grid.appendChild(chip);
+  input.value = '';
+  haptic('medium');
 }
 
 function buildSliders(containerId, prefix) {
