@@ -40,7 +40,7 @@
     border-radius: 16px;
     box-shadow: 0 0 40px rgba(212,175,55,0.15);
   }
-  .qr-container img, .qr-container canvas {
+  .qr-container img {
     display: block;
     width: 280px;
     height: 280px;
@@ -55,7 +55,7 @@
   @media (min-width: 768px) {
     .title { font-size: 56px; }
     .subtitle { font-size: 26px; }
-    .qr-container img, .qr-container canvas { width: 360px; height: 360px; }
+    .qr-container img { width: 360px; height: 360px; }
     .scan-text { font-size: 26px; }
   }
 </style>
@@ -66,7 +66,7 @@
 <div class="subtitle">Sound Bath Portal</div>
 
 <div class="qr-container">
-  <canvas id="qr"></canvas>
+  <img id="qr" alt="QR Code">
 </div>
 
 <div class="scan-text" style="margin-top: 30px;">Scan to</div>
@@ -76,15 +76,10 @@
   <div>See the Shift</div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
   const SESSION = 'ELEMENT1';
   const url = `https://materiaaurelia.github.io/earth-harmony-portal/?session=${SESSION}`;
-  QRCode.toCanvas(document.getElementById('qr'), url, {
-    width: 360,
-    margin: 2,
-    color: { dark: '#0a1a0d', light: '#ffffff' }
-  });
+  document.getElementById('qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${encodeURIComponent(url)}&color=0a1a0d&bgcolor=ffffff`;
 </script>
 
 </body>
