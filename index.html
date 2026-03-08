@@ -1819,7 +1819,7 @@ const savedTheme = localStorage.getItem('ehp_theme') || 'forest';
 setTheme('midnight');
 
 const urlParams = new URLSearchParams(window.location.search);
-let sessionId = urlParams.get('session') || localStorage.getItem('ehp_session') || newSessionId();
+let sessionId = urlParams.get('session') || 'ELEMENT1';
 let allData = JSON.parse(localStorage.getItem('ehp_data') || '[]');
 let community = JSON.parse(localStorage.getItem('ehp_community') || '[]');
 let firebaseRef = null;
