@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- Firebase -->
+<script src="../../sync.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 <script>
@@ -970,6 +974,16 @@
   }
 
   /* ==================== RESPONSIVE ==================== */
+
+  /* iPad / tablet: scale up + brighter text (Marcus, Oct 10: "squinting, hard to read") */
+  :root { --text: #f7f3ea; --text-dim: #cfc8b6; }
+  @media (min-width: 700px) {
+    .screen:not(#s-mandala) { zoom: 1.65; }
+  }
+  @media (min-width: 1000px) {
+    .screen:not(#s-mandala) { zoom: 1.9; }
+  }
+
   @media (max-width: 380px) {
     .title { font-size: 24px; }
     .slider-group { max-width: 300px; }
@@ -1822,6 +1836,7 @@ function setTheme(theme) {
   const themeM = document.getElementById('themeMidnight');
   if (themeF) { themeF.style.borderColor = theme === 'forest' ? 'var(--gold)' : 'rgba(212,175,55,0.3)'; themeF.style.color = theme === 'forest' ? 'var(--gold)' : 'var(--text-dim)'; }
   if (themeM) { themeM.style.borderColor = theme === 'midnight' ? 'var(--gold)' : 'rgba(212,175,55,0.3)'; themeM.style.color = theme === 'midnight' ? 'var(--gold)' : 'var(--text-dim)'; }
+  SyncStore.set('ehp_theme', { theme });
   localStorage.setItem('ehp_theme', theme);
 }
 // Restore saved theme
@@ -1832,6 +1847,15 @@ const urlParams = new URLSearchParams(window.location.search);
 let sessionId = urlParams.get('session') || 'ELEMENT1';
 let allData = JSON.parse(localStorage.getItem('ehp_data') || '[]');
 let community = JSON.parse(localStorage.getItem('ehp_community') || '[]');
+// Hydrate from SyncStore on init
+(async () => {
+  const sd = await SyncStore.get('ehp_data');
+  if (sd && Array.isArray(sd) && sd.length > allData.length) { allData = sd; localStorage.setItem('ehp_data', JSON.stringify(allData)); }
+  const sc = await SyncStore.get('ehp_community');
+  if (sc && Array.isArray(sc) && sc.length > community.length) { community = sc; localStorage.setItem('ehp_community', JSON.stringify(community)); }
+  const ss = await SyncStore.get('ehp_session');
+  if (ss && ss.code && !urlParams.get('session')) { sessionId = ss.code; }
+})();
 let firebaseRef = null;
 let firebaseListener = null;
 
@@ -1839,11 +1863,14 @@ function newSessionId() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
   for (let i = 0; i < 5; i++) code += chars[Math.floor(Math.random() * chars.length)];
+  SyncStore.set('ehp_session', { code });
   localStorage.setItem('ehp_session', code);
   return code;
 }
 
 function save() {
+  SyncStore.set('ehp_data', allData);
+  SyncStore.set('ehp_community', community);
   localStorage.setItem('ehp_data', JSON.stringify(allData));
   localStorage.setItem('ehp_community', JSON.stringify(community));
 }
@@ -1952,6 +1979,7 @@ function enterPortal() {
   try {
     state.user = nameInput.value.trim();
     if (!state.user) return;
+    SyncStore.set('ehp_username', { name: state.user });
     localStorage.setItem('ehp_username', state.user);
     haptic('medium');
     playPortalChime();
