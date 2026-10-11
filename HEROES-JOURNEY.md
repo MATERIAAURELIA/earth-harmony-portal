@@ -48,3 +48,8 @@ Averages flatten. Report in this order:
 3. **Low vs high starters** — lowest-arriving half climbed +17 vs +10 for the higher half: *the lower someone arrived, the further they travelled.*
 4. **Share of available room used** (fair to people who arrive well) — Oct 10 ≈ 50%.
 5. Median, then averages last.
+
+## Public results page — framing (Marcus, Oct 10)
+Call it RESEARCH so people searching for it find it: e.g. "Sound Bath Field Research: What [N] Guests Reported" (targets "sound bath research / study / results / do sound baths work").
+Honest framing = a short METHOD box: self-reported check-in/check-out on iPads, 0–10 scales (Harmony, Alignment, Mind, Body, Spirit), same session, no control group, anonymous; practitioner field research, not a clinical study. No medical claims.
+Shape: one cumulative page that grows + per-session pages under it (linked from each permanent event page). Room-level + anonymous only.
