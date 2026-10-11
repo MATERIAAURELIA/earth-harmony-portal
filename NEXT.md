@@ -14,3 +14,6 @@ Map what each surface asks/shows so nothing repeats:
 - Follow-up email: room arc (clouds, intentions, group shift, insight) + Help us grow
 - Feedback page (?e=): experience text, Google review copy button
 Questions: does feedback page re-ask what the portal already captured? can check-out be shorter now that the email carries the room view? one source per question.
+
+## IDEA (Marcus, Oct 10): show THE PARTY — the game landed ("check-in was fun, felt like a game")
+In the Room view + follow-up email: the handles + which archetypes showed up (e.g. "2 Healers · 1 Sage · ..."), like an RPG party screen. LILA framing confirmed by guests.
