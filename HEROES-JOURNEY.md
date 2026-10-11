@@ -40,3 +40,11 @@
 
 ## Why it matters (the bigger picture)
 Validity, made by the room itself — not claims about sound, but guests' own words and numbers, session after session. A compounding archive (projects/soundbath-portal-data/) → a public "What shifts in the room" page. Room-level + anonymous = publishable; an individual's shift = ask first.
+
+## How we read the numbers (Marcus, Oct 10 — "that's what I was trying to get at")
+Averages flatten. Report in this order:
+1. **Who rose** — "8 of 8 rose in Body" (count of people up / same / down per area).
+2. **The furthest travelled** — everyone who arrived ≤3 in any area and where they landed (Oct 10: all 9 low scores rose; RedRose23 Alignment 1→5, Dee Body 2→7, Thiaheart Alignment 3→10).
+3. **Low vs high starters** — lowest-arriving half climbed +17 vs +10 for the higher half: *the lower someone arrived, the further they travelled.*
+4. **Share of available room used** (fair to people who arrive well) — Oct 10 ≈ 50%.
+5. Median, then averages last.
