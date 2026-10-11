@@ -53,3 +53,7 @@ Averages flatten. Report in this order:
 Call it RESEARCH so people searching for it find it: e.g. "Sound Bath Field Research: What [N] Guests Reported" (targets "sound bath research / study / results / do sound baths work").
 Honest framing = a short METHOD box: self-reported check-in/check-out on iPads, 0–10 scales (Harmony, Alignment, Mind, Body, Spirit), same session, no control group, anonymous; practitioner field research, not a clinical study. No medical claims.
 Shape: one cumulative page that grows + per-session pages under it (linked from each permanent event page). Room-level + anonymous only.
+
+## Next (Marcus, Oct 10)
+- Results/field-study numbers go NEXT TO THE BOOKING SECTION on the website (proof right where people decide).
+- The portal runs for ANY event: home journeys, partner studios (Ekatra, Yoga Within), Roots B2B community baths, drum circles (Pulse of Life), corporate team building. MAT idea: a per-event-type metric set — e.g. drum circles/team building measure Connection · Energy · Belonging · Stress · Joy (the HR outcomes from the drum research brief) → corporate case studies with real numbers.
