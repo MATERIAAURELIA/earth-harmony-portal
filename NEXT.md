@@ -26,3 +26,4 @@ In the Room view + follow-up email: the handles + which archetypes showed up (e.
 3. Take-home quest card: their body-shift as an image they can save/send to themselves → keepsake + word of mouth.
 4. Party screen opening the Room view (archetypes + handles).
 5. Facilitator view on Marcus's phone during arrival (live cloud + count) — he can name the room's mood before he plays.
+6. INTENTION DRAW (Marcus, Oct 10 — a guest said "I dunno?"): "Draw an intention" button on the intention screen → pulls one at random from a deck (rest · release · open · trust · soften · receive · listen · begin again …). MAT: frame it as pulling a CARD (ties to Marcus's wisdom-card deck / "click:wisdom-card-reveal" on the site) — sacred, not random. Same 🎲 idea for handles.
