@@ -17,3 +17,12 @@ Questions: does feedback page re-ask what the portal already captured? can check
 
 ## IDEA (Marcus, Oct 10): show THE PARTY — the game landed ("check-in was fun, felt like a game")
 In the Room view + follow-up email: the handles + which archetypes showed up (e.g. "2 Healers · 1 Sage · ..."), like an RPG party screen. LILA framing confirmed by guests.
+
+## RESTORE (Marcus, Oct 10): the fun HANDLE prompt — MAT stripped "eg. GoldenWeaver · RebelHugz7 · WildBear" + changed placeholder to "your name" in the lean pass. Marcus: handles ARE the fun/game. Bring back (maybe + 🎲 roll-a-handle button).
+
+## MAT suggestions for the revision session (Oct 10)
+1. Intention callback at check-out: "You came in for 'Rest'. Did you find it?" → yes / some / not yet. Closes the quest loop; best single metric of the night.
+2. Quest XP for returning handles: "3rd journey · Level 3 Healer", lifetime shift total. Needs persistent users (name list) — the retention loop, gamified.
+3. Take-home quest card: their body-shift as an image they can save/send to themselves → keepsake + word of mouth.
+4. Party screen opening the Room view (archetypes + handles).
+5. Facilitator view on Marcus's phone during arrival (live cloud + count) — he can name the room's mood before he plays.
