@@ -36,3 +36,5 @@ Map (MAT): Arrive = the Call · archetype = who you are on the road · intention
 From the first 2 runs feedback: we separate people from their devices. In the room = shared iPads. QR on own phone CAN work too (Marcus, same day: 'no doubt') — likely outside the quiet window: before arriving / after leaving / at home. Capacity answer = more iPads (3rd is with Holly; used iPad 6 ~$150–160; iPad 4 = iOS 10, likely too old, test first).
 
 ## SEED (Marcus, Oct 15): add THE FOOL / TRICKSTER archetype ("next time"). Current 7: Warrior · Lover · Rebel · Child · Healer · Magician · Sage. Archetypes image v2 must show all (Lover still missing from the Gemini art).
+
+## NEXT BUILD (Marcus, Oct 15): ARCHETYPE POWER-UP on Your Shift — crop their chosen figure from archetypes.jpg (7 standing, one per column), glow it gold, dim the rest; show their shift as power-up bars ("Healer · Body +3 · Spirit +2 · Level up"). Pairs with returning-handle levels (Oct 10). Welcome = archetypes.jpg (7 standing); The Room = fellowship.jpg (action).
