@@ -31,3 +31,8 @@ In the Room view + follow-up email: the handles + which archetypes showed up (e.
 ## ⭐ NORTH STAR (Marcus, Oct 10 night) — verbatim
 "The card is a clue on the quest — that's it. I want everybody to feel like they are being met on their path of their own hero's journey."
 Map (MAT): Arrive = the Call · archetype = who you are on the road · intention card = the clue/mentor's gift · the journey = crossing the threshold · "Bring Something Back" = return with the elixir · Your Shift = what changed in you · The Room = the fellowship · returning handle/levels = the road continues.
+
+## PRINCIPLE (Marcus, Oct 14): NO GUEST PHONES
+From the first 2 runs feedback: we separate people from their devices. In the room = shared iPads. QR on own phone CAN work too (Marcus, same day: 'no doubt') — likely outside the quiet window: before arriving / after leaving / at home. Capacity answer = more iPads (3rd is with Holly; used iPad 6 ~$150–160; iPad 4 = iOS 10, likely too old, test first).
+
+## SEED (Marcus, Oct 15): add THE FOOL / TRICKSTER archetype ("next time"). Current 7: Warrior · Lover · Rebel · Child · Healer · Magician · Sage. Archetypes image v2 must show all (Lover still missing from the Gemini art).
