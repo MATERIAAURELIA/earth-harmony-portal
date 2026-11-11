@@ -9,6 +9,13 @@
 <!-- Firebase -->
 <script src="../../sync.js"></script>
 <script>
+  // Fallback when sync.js isn't there (GitHub Pages: ../../sync.js 404s → page crashed, "nameInput before initialization" on phones, Nov 10)
+  if (typeof SyncStore === 'undefined') { var SyncStore = {
+    get: function (key) { return new Promise(function (resolve) { try { var raw = localStorage.getItem(key); resolve(raw ? JSON.parse(raw) : null); } catch (e) { resolve(null); } }); },
+    set: function (key, data) { try { data._ts = Date.now(); localStorage.setItem(key, JSON.stringify(data)); } catch (e) {} return Promise.resolve(); }
+  }; }
+</script>
+<script>
   // TEMP debug (Oct 10): show the first startup error on screen so we can see it on the iPad
   window.__ehErr = null;
   window.addEventListener('error', function(e){

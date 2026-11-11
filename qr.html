@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Earth Harmony — Scan to Check In</title>
 <style>
@@ -78,7 +81,7 @@
 
 <script>
   const SESSION = 'ELEMENT1';
-  const url = `https://materiaaurelia.github.io/earth-harmony-portal/?session=${SESSION}`;
+  const url = 'https://materiaaurelia.github.io/earth-harmony-portal/'; // no ?session: phones join today's room (S<date>) like the iPad
   document.getElementById('qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=${encodeURIComponent(url)}&color=0a1a0d&bgcolor=ffffff`;
 </script>
 
