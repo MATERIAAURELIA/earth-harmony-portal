@@ -2889,7 +2889,7 @@ function renderBodyShift() {
     <line x1="${FX}" y1="40" x2="${FX}" y2="372" stroke="rgba(245,208,96,0.22)" stroke-width="2" stroke-dasharray="4 6"/>
     <g id="bsFloat"></g>`;
   PTS.forEach(p => {
-    const pre = state.preScores[p.id] ?? 5, post = state.postScores[p.id] ?? 5, d = post - pre;
+    const pre = state.preScores[p.id] ?? 5, post = state.postScores[p.id] ?? 5, d = Math.round((post - pre) * 10) / 10;
     const col = d > 0 ? '#f5d060' : d < 0 ? '#c4a0b8' : '#cfc8b6';
     const sign = d > 0 ? '+' : '';
     svg += `<circle class="bs-glow" cx="${FX}" cy="${p.y}" r="${glowR(pre)}" fill="url(#glow)" opacity="${0.25 + pre / 16}"/>
@@ -2939,7 +2939,7 @@ function renderBodyShift() {
       const a = +n.dataset.pre, b = +n.dataset.post, dur = 1300, t0 = performance.now();
       const tick = (now) => {
         const q = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - q, 3), v = a + (b - a) * e;
-        n.textContent = Math.round(v);
+        n.textContent = (Number.isInteger(a) && Number.isInteger(b)) ? Math.round(v) : v.toFixed(1);   // room averages keep 1 decimal (Oct 30 bug)
         g.setAttribute('r', glowR(v).toFixed(1));
         g.setAttribute('opacity', (0.25 + v / 16).toFixed(2));
         if (q < 1) requestAnimationFrame(tick);
